@@ -3,6 +3,13 @@ const dropZone = document.getElementById("dropZone");
 const selectedImg = document.querySelector(".selected-img");
 const imageName = document.getElementById("image-name");
 const closeBtn = document.getElementById("close-btn");
+const form = document.querySelector("form");
+const authorInput = document.getElementById("author");
+const blogTitle = document.getElementById("blog-title");
+const blogDesr = document.getElementById("blog-description");
+const blogDate = document.getElementById("blog-date");
+const userMail = document.getElementById("email");
+const submitBtn = document.getElementById("submit");
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -54,3 +61,19 @@ closeBtn.addEventListener("click", (e) => {
 fileInput.addEventListener("change", async () => {
   base64 = await convertToBase64(fileInput.files[0]);
 });
+
+const addBlog = async () => {
+  const response = await fetch("http://localhost:4000/add-blog", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      image: base64,
+      author: authorInput.value,
+      title: blogTitle.value,
+      description: blogDesr.value,
+      date: blogDate.value,
+      email: userMail.value,
+    }),
+  });
+  console.log(response);
+};
