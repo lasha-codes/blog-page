@@ -3,14 +3,33 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "FiraGO";
+  font-weight: 400;
 }
 html {
   scroll-behavior: smooth;
+  font-size: 10px;
 }
 body {
   height: 100vh;
 }
 header {
   width: 100%;
-  padding: 0 76px;
+  padding: 28px 76px;
+  display: flex;
+  justify-content: space-between;
+}
+.login {
+  display: inline-flex;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #5d37f3;
+}
+.login-btn {
+  all: unset;
+  color: #fff;
+  font-family: "FiraGO";
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
 }
