@@ -53,3 +53,15 @@ h1 {
   font-weight: 700;
   line-height: 72px;
 }
+.blog-types {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+.blog-types button {
+  all: unset;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
