@@ -3,6 +3,20 @@ const dropZone = document.getElementById("dropZone");
 const selectedImg = document.querySelector(".selected-img");
 const imageName = document.getElementById("image-name");
 const closeBtn = document.getElementById("close-btn");
+let base64;
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+};
+
 selectedImg.style.display = "none";
 dropZone.addEventListener("dragover", (event) => {
   event.preventDefault();
@@ -36,4 +50,7 @@ closeBtn.addEventListener("click", (e) => {
   dropZone.style.display = "flex";
   selectedImg.style.display = "none";
   imageName.innerHTML = "";
+});
+fileInput.addEventListener("change", async () => {
+  base64 = await convertToBase64(fileInput.files[0]);
 });
