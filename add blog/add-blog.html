@@ -21,19 +21,19 @@
           <div>
             <h3>ატვირთეთ ფოტო</h3>
           </div>
-          <div class="file-upload">
+          <div class="file-upload" id="dropZone">
             <label for="upload-input">
-              <div class="file-choose">
-                <img src="../imgs/folder-icon.png" alt="folder-icon" />
-                <p class="drag-file">
-                  ჩააგდეთ ფაილი აქ ან <span>აირჩიეთ ფაილი</span>
-                </p>
-              </div>
+                <div class="file-choose">
+                    <img src="../imgs/folder-icon.png" alt="folder-icon" />
+                    <p class="drag-file">
+                        ჩააგდეთ ფაილი აქ ან <span>აირჩიეთ ფაილი</span>
+                    </p>
+                </div>
             </label>
-            <input type="file" id="upload-input" />
-          </div>
+            <input type="file" id="upload-input" multiple hidden />
         </div>
       </section>
     </main>
+    <script src="./script.js"></script>
   </body>
 </html>

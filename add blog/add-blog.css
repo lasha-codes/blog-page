@@ -78,6 +78,6 @@ h3 {
   text-decoration-line: underline;
   cursor: pointer;
 }
-#upload-input {
-  display: none;
+.drag-over {
+  border: 2px solid green;
 }
