@@ -30,6 +30,7 @@ header {
   padding: 10px 20px;
   border-radius: 8px;
   background: #5d37f3;
+  cursor: pointer;
 }
 .login-btn {
   all: unset;
@@ -70,6 +71,7 @@ h1 {
   display: flex;
   padding: 8px 16px;
   border-radius: 30px;
+  cursor: pointer;
 }
 .market {
   background: rgba(255, 184, 47, 0.08);
