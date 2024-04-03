@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Fira Sans";
-  font-weight: 400;
+  font-weight: 500;
 }
 html {
   scroll-behavior: smooth;
@@ -77,31 +77,31 @@ h1 {
   background: rgba(255, 184, 47, 0.08);
 }
 .market button {
-  color: #d6961c;
+  color: #d6961c !important;
 }
 .application {
   background: rgba(28, 214, 125, 0.08);
 }
 .application button {
-  color: #15c972;
+  color: #15c972 !important;
 }
 .AI {
   background: #eee1f7;
 }
 .AI button {
-  color: #b71fdd;
+  color: #b71fdd !important;
 }
 .UI {
   background: rgba(250, 87, 87, 0.08);
 }
 .UI button {
-  color: #dc2828;
+  color: #dc2828 !important;
 }
 .research {
   background: #e9efe9;
 }
 .research button {
-  color: #60be16;
+  color: #60be16 !important;
 }
 .figma {
   background: rgba(8, 210, 174, 0.08);
@@ -109,10 +109,71 @@ h1 {
 .figma button {
   color: #1ac7a8;
 }
+.user-blog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 408px;
+}
+.blogs-section {
+  padding-left: 76px;
+  margin-top: 64px;
+}
 .blog-img {
   width: 408px;
   height: 328px;
   border-radius: 12px;
   background: url("./imgs/hills-img.png") lightgray 50%;
   background-size: cover;
+}
+.blogger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.blogger-name {
+  color: #1a1a1f;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.publish-date {
+  color: #85858d;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+.blog-title {
+  color: #1a1a1f;
+  font-size: 2rem;
+  font-style: normal;
+  line-height: 28px;
+}
+.user-blog-types {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+}
+.user-blog-types button {
+  all: unset;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+.blog-description p {
+  color: #404049;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+}
+.see-all {
+  display: flex;
+  gap: 4px;
+}
+.see-all span {
+  cursor: pointer;
+  color: #5d37f3;
+  font-size: 1.4rem;
+  line-height: 20px;
 }
