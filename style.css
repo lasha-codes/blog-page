@@ -109,3 +109,10 @@ h1 {
 .figma button {
   color: #1ac7a8;
 }
+.blog-img {
+  width: 408px;
+  height: 328px;
+  border-radius: 12px;
+  background: url("./imgs/hills-img.png") lightgray 50%;
+  background-size: cover;
+}
