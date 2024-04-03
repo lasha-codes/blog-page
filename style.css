@@ -177,3 +177,10 @@ h1 {
   font-size: 1.4rem;
   line-height: 20px;
 }
+.photo-info {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 12px;
+  background-color: black;
+}

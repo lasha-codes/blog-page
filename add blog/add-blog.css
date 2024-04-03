@@ -81,3 +81,23 @@ h3 {
 .drag-over {
   border: 2px solid green;
 }
+.selected-img {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  border: 1px dashed #85858d;
+  background: #f4f3ff;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  height: 50px;
+}
+.photo-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#close-btn {
+  cursor: pointer;
+}
