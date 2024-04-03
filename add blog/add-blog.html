@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ბლოგის დამატება</title>
+    <link rel="stylesheet" href="add-blog.css" />
   </head>
   <body>
     <header>
       <div class="redberrylogo">
-        <img src="./imgs/redberry-logo.png" alt="rebderry-logo" />
+        <img src="../imgs/redberry-logo.png" alt="rebderry-logo" />
       </div>
     </header>
     <main>
@@ -18,10 +19,17 @@
         </div>
         <div class="file-section">
           <div>
-            <span>ატვირთეთ ფოტო</span>
+            <h3>ატვირთეთ ფოტო</h3>
           </div>
           <div class="file-upload">
-            <label for="upload-input"></label>
+            <label for="upload-input">
+              <div class="file-choose">
+                <img src="../imgs/folder-icon.png" alt="folder-icon" />
+                <p class="drag-file">
+                  ჩააგდეთ ფაილი აქ ან <span>აირჩიეთ ფაილი</span>
+                </p>
+              </div>
+            </label>
             <input type="file" id="upload-input" />
           </div>
         </div>
