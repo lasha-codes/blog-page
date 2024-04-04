@@ -78,6 +78,13 @@ h3 {
   line-height: 20px;
   text-decoration-line: underline;
   cursor: pointer;
+  font-weight: bold;
+}
+.drag-file {
+  color: #1a1a1f;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }
 .drag-over {
   border: 2px solid green;
@@ -102,7 +109,11 @@ h3 {
 #close-btn {
   cursor: pointer;
 }
-
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .blog-author {
   display: flex;
   flex-direction: column;
@@ -145,6 +156,7 @@ ul li {
   line-height: 20px;
 }
 .author-and-heading {
+  margin-top: 24px;
   display: flex;
   gap: 24px;
 }
@@ -160,7 +172,33 @@ ul li {
   width: 100%;
 }
 .blog-desc-input {
+  resize: none;
   width: 100%;
-  height: 124px;
+  min-height: 124px;
   padding: 12px 0 92px 16px;
+}
+.blog-desc-input::placeholder {
+  font-size: 15px;
+}
+input[type="date"] {
+  all: unset;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  left: 0;
+}
+.date-input {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  width: 100%;
+  max-width: 288px;
+  position: relative;
 }
