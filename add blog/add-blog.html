@@ -20,7 +20,7 @@
         <div class="heading-div">
           <h1>ბლოგის დამატება</h1>
         </div>
-        <div class="file-section">
+        <main class="file-section">
           <div>
             <h3>ატვირთეთ ფოტო</h3>
           </div>
@@ -55,7 +55,7 @@
                 <input type="file" id="upload-input" multiple hidden />
             </div>
             <section class="form-section">
-<form>
+              <form>
 <div class="author-and-heading">
   <div class="blog-author">
     <h2>ავტორი*</h2>
@@ -112,7 +112,9 @@
     <div class="category-container">
       <h2>კატეგორია *</h2>
       <div class="input-container category-chooser forms-inputs">
-        <span class="select-category">აირჩიეთ კატეგორია</span>
+        <div class="category-list">
+          <span class="select-category">აირჩიეთ კატეგორია</span>
+        </div>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" id="arrow-down">
           <path d="M16.6004 7.45831L11.1671 12.8916C10.5254 13.5333 9.47539 13.5333 8.83372 12.8916L3.40039 7.45831" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -121,22 +123,28 @@
     </div>
     <div class="categories">
       <div class="market blog-type">
-        <button>მარკეტი</button>
+        <button type="button">მარკეტი</button>
+        <img src="../imgs/close.png" />
       </div>
       <div class="application blog-type">
-        <button>აპლიკაცია</button>
+        <button type="button">აპლიკაცია</button>
+        <img src="../imgs/close.png" />
       </div>
       <div class="AI blog-type">
-        <button>ხელოვნური ინტელექტი</button>
+        <button type="button">ხელოვნური ინტელექტი</button>
+        <img src="../imgs/close.png" />
       </div>
       <div class="UI blog-type">
-        <button>UI/UX</button>
+        <button type="button">UI/UX</button>
+        <img src="../imgs/close.png" />
       </div>
       <div class="research blog-type">
-        <button>კვლევა</button>
+        <button type="button">კვლევა</button>
+        <img src="../imgs/close.png" />
       </div>
       <div class="figma blog-type">
-        <button>Figma</button>
+        <button type="button">Figma</button>
+        <img src="../imgs/close.png" />
       </div>
     </div>
   </div>
@@ -149,11 +157,11 @@
     <div class="submit-container">
       <button>გამოქვეყნება</button>
     </div>
-            </form>
-            </section>
-            
-      </section>
-    </main>
+  </form>
+</section>  
+</main>
+
     <script src="./script.js"></script>
+
   </body>
 </html>
