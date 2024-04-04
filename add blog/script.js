@@ -10,6 +10,8 @@ const blogDesr = document.getElementById("blog-description");
 const blogDate = document.getElementById("blog-date");
 const userMail = document.getElementById("email");
 const submitBtn = document.getElementById("submit");
+const arrowDown = document.getElementById("arrow-down");
+const categorySelector = document.querySelector(".categories");
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -78,3 +80,7 @@ const addBlog = async () => {
   });
   console.log(response);
 };
+arrowDown.addEventListener("click", () => {
+  arrowDown.classList.toggle("turn-down");
+  categorySelector.classList.toggle("visible-selector");
+});
