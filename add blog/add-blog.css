@@ -201,4 +201,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
   max-width: 288px;
   position: relative;
+  height: 44px;
+}
+.blog-date-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 288px;
+}
+.date-and-categories {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+}
+.category-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 288px;
+}
+.category-chooser {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+.select-category {
+  color: #85858d;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
 }
