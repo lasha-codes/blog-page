@@ -51,8 +51,23 @@
                 </label>
                 <input type="file" id="upload-input" multiple hidden />
             </div>
-            <form>
-     <input type="text" placeholder="შეიყვნეთ ავტორი" id="author">
+            <section class="form-section">
+<form>
+
+  <div class="blog-author">
+    <h2>ავტორი</h2>
+    <div class="author-input">
+      <input type="text" placeholder="შეიყვნეთ ავტორი" id="author">
+    </div>
+    <div class="input-requirments">
+      <ul>
+        <li>მინიმუმ 4 სიმბოლო</li>
+        <li> მინიმუმ ორი სიტყვა</li>
+        <li>მხოლოდ ქართული სიმბოლოები</li>
+      </ul>
+    </div>
+  </div>
+
      <input type="text" name="" id="" placeholder="შეიყვნეთ სათაური" id="blog-title">
      <input type="text" placeholder="შეიყვნეთ აღწერა" id="blog-description">
      <input type="date" id="blog-date">
@@ -60,6 +75,8 @@
      <input type="email" name="" id="" placeholder="Example@redberry.ge" id="email">
 <input type="submit"  value="გამოქვეყნება" id="submit">
             </form>
+            </section>
+            
       </section>
     </main>
     <script src="./script.js"></script>

@@ -73,6 +73,7 @@ const addBlog = async () => {
       description: blogDesr.value,
       date: blogDate.value,
       email: userMail.value,
+      types: ["მარკეტი", "კვლევა"],
     }),
   });
   console.log(response);
