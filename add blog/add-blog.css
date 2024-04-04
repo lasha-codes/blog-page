@@ -13,6 +13,7 @@ html {
 body {
   position: relative;
   background: #fbfaff;
+  padding-bottom: 110px;
 }
 header {
   background: #fff;
@@ -146,8 +147,6 @@ input::placeholder {
   width: 216px;
 }
 ul li {
-  margin-left: 0;
-  list-style: ;
   color: #85858d;
   font-size: 12px;
   font-weight: 400;
@@ -265,4 +264,63 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #move-arrow {
   position: absolute;
   left: 5%;
+}
+.blog-type {
+  display: flex;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.categories {
+  position: absolute;
+  background: white;
+  border: 1px gainsboro;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 288px;
+}
+.categories button {
+  all: unset;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+.market {
+  background: rgba(255, 184, 47, 0.08);
+}
+.market button {
+  color: #d6961c !important;
+}
+.application {
+  background: rgba(28, 214, 125, 0.08);
+}
+.application button {
+  color: #15c972 !important;
+}
+.AI {
+  background: #eee1f7;
+}
+.AI button {
+  color: #b71fdd !important;
+}
+.UI {
+  background: rgba(250, 87, 87, 0.08);
+}
+.UI button {
+  color: #dc2828 !important;
+}
+.research {
+  background: #e9efe9;
+}
+.research button {
+  color: #60be16 !important;
+}
+.figma {
+  background: rgba(8, 210, 174, 0.08);
+}
+.figma button {
+  color: #1ac7a8;
 }
