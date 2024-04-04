@@ -114,6 +114,9 @@ form {
   flex-direction: column;
   gap: 24px;
 }
+main {
+  padding-top: 40px;
+}
 .blog-author {
   display: flex;
   flex-direction: column;
@@ -232,5 +235,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #85858d;
   font-size: 15px;
   font-weight: 400;
+  line-height: 20px;
+}
+.email-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 288px;
+}
+.submit-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  width: 288px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #e4e3eb;
+  align-self: flex-end;
+}
+.submit-container button {
+  all: unset;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 20px;
 }
