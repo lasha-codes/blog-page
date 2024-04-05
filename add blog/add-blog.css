@@ -309,24 +309,30 @@ input[type='date']::-webkit-calendar-picker-indicator {
   background: #eee1f7;
   color: #b71fdd;
   min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .AI button {
   color: #b71fdd !important;
 }
 .UI {
   background: rgba(250, 87, 87, 0.08);
+  color: #dc2828;
 }
 .UI button {
   color: #dc2828 !important;
 }
 .research {
   background: #e9efe9;
+  color: #60be16;
 }
 .research button {
   color: #60be16 !important;
 }
 .figma {
   background: rgba(8, 210, 174, 0.08);
+  color: #1ac7a8;
 }
 .figma button {
   color: #1ac7a8;
@@ -369,7 +375,16 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .category-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 6px 14px;
   border-radius: 20px;
   border: none;
+}
+
+.category-list button img {
+  width: 8px;
+  height: 8px;
+  cursor: pointer;
 }

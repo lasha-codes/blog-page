@@ -14,6 +14,7 @@ const arrowDown = document.getElementById('arrow-down')
 const categorySelector = document.querySelector('.categories')
 const typeButtons = document.querySelectorAll('.blog-type')
 const categoryList = document.querySelector('.category-list')
+let deleteImages = document.querySelectorAll('.delete-image')
 
 let base64
 const convertToBase64 = (file) => {
@@ -88,36 +89,58 @@ arrowDown.addEventListener('click', () => {
   categorySelector.classList.toggle('visible-selector')
 })
 
-const typesArr = []
+let typesArr = []
 let error = []
 
-typeButtons.forEach((button, idx) => {
+typeButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    typesArr.forEach((type) => {
+    error = []
+    typesArr.forEach((type, index) => {
       if (type.name === button.innerText.trim()) {
-        error.push(' ')
+        error.push('err')
       }
     })
     if (error.length > 0) return
     error = []
     typesArr.push({
       name: button.innerText.trim(),
-      idx: idx,
       className: button.className,
     })
     updateList()
   })
 })
 
+window.addEventListener('click', () => {
+  deleteImages = document.querySelectorAll('.delete-image')
+  rerun()
+})
+
+const rerun = () => {
+  deleteImages.forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      console.log(idx)
+      typesArr = typesArr.filter((type, index) => {
+        return index !== idx
+      })
+      updateList()
+    })
+  })
+}
+
 const updateList = () => {
   categoryList.innerHTML = ''
 
   typesArr.forEach((type) => {
     const button = document.createElement('button')
+    const image = document.createElement('img')
     const firstClass = type.className.split(' ')[0]
     button.textContent = type.name
+    image.setAttribute('src', '../imgs/close.png')
+    image.classList.add('delete-image')
     button.setAttribute('type', 'button')
+    button.appendChild(image)
     button.classList.add(firstClass)
     categoryList.appendChild(button)
+    console.log(typesArr)
   })
 }
