@@ -24,6 +24,7 @@ const categoryContainer = document.querySelector(".category-chooser");
 const dateContainer = document.querySelector(".date-input");
 const emailContainer = document.querySelector(".email-container");
 const errorSpan = document.querySelectorAll(".error-span");
+const descrSymbol = document.querySelector(".description-symbol");
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -213,7 +214,6 @@ blogTitle.addEventListener("change", () => {
   } else {
     blogTitle.style.outline = "1px solid #14D81C";
     blogTitle.style.background = "white";
-    headingCharacters.style.color = "#14D81C";
   }
 });
 blogDesr.addEventListener("click", () => {
@@ -227,8 +227,8 @@ blogDesr.addEventListener("change", () => {
     blogDesr.style.background = "#FAF2F3";
   } else {
     blogDesr.style.outline = " 1.5px solid #14D81C";
-    blogDesr.style.background = "white";
-    headingCharacters.style.color = "#14D81C";
+
+    descrSymbol.style.color = "#14D81C";
   }
 });
 blogDate.addEventListener("click", () => {
