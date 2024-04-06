@@ -390,3 +390,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .delete-blog-type {
   width: 8px;
 }
+.darker {
+  opacity: 3;
+}

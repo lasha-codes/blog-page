@@ -16,7 +16,9 @@ const typeButtons = document.querySelectorAll(".blog-type");
 const categoryList = document.querySelector(".category-list");
 const selectCategorySpan = document.querySelector(".select-category");
 let deleteImages = document.querySelectorAll(".delete-image");
-
+const fourSymblol = document.getElementById("4-symbol");
+const twoWords = document.getElementById("two-words");
+const georgianSymbol = document.getElementById("georgian-only");
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -101,12 +103,10 @@ typeButtons.forEach((button, index) => {
     if (!array.includes(button)) {
       let clonedButton = button.cloneNode(true);
       let clonedDeleteBtn = deleteType.cloneNode(true);
-
       categoryList.appendChild(clonedButton);
-
       clonedButton.appendChild(clonedDeleteBtn);
+      clonedButton.classList.add("darker");
       array.push(button);
-      finalArray = array;
 
       clonedDeleteBtn.addEventListener("click", () => {
         clonedButton.remove();
@@ -117,4 +117,32 @@ typeButtons.forEach((button, index) => {
       });
     }
   });
+});
+isError = false;
+authorInput.addEventListener("input", () => {
+  authorInput.style.outline = "none";
+  authorInput.style.outline = "1.5px solid #5D37F3";
+  if (authorInput.value.length >= 4) {
+    fourSymblol.style.color = "#14D81C";
+  } else {
+    isError = true;
+    fourSymblol.style.color = "#85858D";
+  }
+  const splitedValue = authorInput.value.split("");
+  if (
+    splitedValue.includes(" ") &&
+    splitedValue[splitedValue.length - 1] !== " "
+  ) {
+    twoWords.style.color = "#14D81C";
+  } else {
+    twoWords.style.color = "#85858D";
+    isError = true;
+  }
+  const georgianRegex = /[\u10A0-\u10FF]/;
+  if (georgianRegex.test(authorInput.value)) {
+    georgianSymbol.style.color = "#14D81C";
+  } else {
+    georgianSymbol.style.color = "#85858D";
+    isError = true;
+  }
 });
