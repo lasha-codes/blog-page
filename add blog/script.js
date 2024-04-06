@@ -12,6 +12,11 @@ const userMail = document.getElementById("email");
 const submitBtn = document.getElementById("submit");
 const arrowDown = document.getElementById("arrow-down");
 const categorySelector = document.querySelector(".categories");
+const typeButtons = document.querySelectorAll(".blog-type");
+const categoryList = document.querySelector(".category-list");
+const selectCategorySpan = document.querySelector(".select-category");
+let deleteImages = document.querySelectorAll(".delete-image");
+
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -83,4 +88,33 @@ const addBlog = async () => {
 arrowDown.addEventListener("click", () => {
   arrowDown.classList.toggle("turn-down");
   categorySelector.classList.toggle("visible-selector");
+});
+let array = [];
+let finalArray;
+const deleteType = document.createElement("img");
+deleteType.setAttribute("src", "../imgs/icons8-close-button-32.png");
+deleteType.classList.add("delete-blog-type");
+
+typeButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    selectCategorySpan.style.display = "none";
+    if (!array.includes(button)) {
+      let clonedButton = button.cloneNode(true);
+      let clonedDeleteBtn = deleteType.cloneNode(true);
+
+      categoryList.appendChild(clonedButton);
+
+      clonedButton.appendChild(clonedDeleteBtn);
+      array.push(button);
+      finalArray = array;
+
+      clonedDeleteBtn.addEventListener("click", () => {
+        clonedButton.remove();
+        array = array.filter((btn) => btn !== button);
+        if (array.length === 0) {
+          selectCategorySpan.style.display = "block";
+        }
+      });
+    }
+  });
 });
