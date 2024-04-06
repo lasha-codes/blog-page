@@ -17,8 +17,12 @@ const categoryList = document.querySelector(".category-list");
 const selectCategorySpan = document.querySelector(".select-category");
 let deleteImages = document.querySelectorAll(".delete-image");
 const fourSymblol = document.getElementById("4-symbol");
+const headingCharacters = document.querySelector(".symbol-limit");
 const twoWords = document.getElementById("two-words");
 const georgianSymbol = document.getElementById("georgian-only");
+const categoryContainer = document.querySelector(".category-chooser");
+const dateContainer = document.querySelector(".date-input");
+const emailContainer = document.querySelector(".email-container");
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -88,8 +92,14 @@ const addBlog = async () => {
   console.log(response);
 };
 arrowDown.addEventListener("click", () => {
+  categoryContainer.style.outline = "1.5px solid #5D37F3";
   arrowDown.classList.toggle("turn-down");
   categorySelector.classList.toggle("visible-selector");
+  if (categorySelector.classList.contains("visible-selector")) {
+    categoryContainer.style.outline = "1.5px solid #5D37F3";
+  } else {
+    categoryContainer.style.outline = "1px solid #E4E3EB";
+  }
 });
 let array = [];
 let finalArray;
@@ -145,4 +155,42 @@ authorInput.addEventListener("input", () => {
     georgianSymbol.style.color = "#85858D";
     isError = true;
   }
+});
+console.log(blogTitle);
+blogTitle.addEventListener("input", () => {
+  blogTitle.style.outline = "none";
+  blogTitle.style.outline = "1.5px solid #5D37F3";
+  if (blogTitle.value.length >= 4) {
+    headingCharacters.style.color = "#14D81C";
+  } else {
+    isError = true;
+    headingCharacters.style.color = "#85858D";
+  }
+});
+
+blogDesr.addEventListener("click", () => {
+  blogDesr.style.background = "white";
+  blogDesr.style.outline = "1.5px solid #5D37F3";
+});
+blogDesr.addEventListener("change", () => {
+  if (blogDesr.value === "") {
+    blogDesr.style.outline = "1.5px solid red";
+    blogDesr.style.background = "#FAF2F3";
+  } else {
+    blogDesr.style.outline = "none";
+    blogDesr.style.background = "white";
+  }
+});
+blogDate.addEventListener("click", () => {
+  dateContainer.style.outline = "1.5px solid #5D37F3";
+});
+blogDate.addEventListener("blur", () => {
+  dateContainer.style.outline = "none";
+});
+
+userMail.addEventListener("click", () => {
+  userMail.style.outline = "1.5px solid #5D37F3";
+});
+userMail.addEventListener("change", () => {
+  userMail.style.outline = "none";
 });
