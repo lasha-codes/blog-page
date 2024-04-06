@@ -23,6 +23,7 @@ const georgianSymbol = document.getElementById("georgian-only");
 const categoryContainer = document.querySelector(".category-chooser");
 const dateContainer = document.querySelector(".date-input");
 const emailContainer = document.querySelector(".email-container");
+const errorSpan = document.querySelectorAll(".error-span");
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -128,16 +129,32 @@ typeButtons.forEach((button, index) => {
     }
   });
 });
-isError = false;
+// Assuming errorSpan is properly defined elsewhere in your code
+
+let isError = false;
+let twoWordsErr = false;
+let georgianErr = false;
+let symbolsErr = false;
+
 authorInput.addEventListener("input", () => {
+  authorInput.style.background = "white";
   authorInput.style.outline = "none";
   authorInput.style.outline = "1.5px solid #5D37F3";
+
+  // Reset errors
+  isError = false;
+  twoWordsErr = false;
+  georgianErr = false;
+  symbolsErr = false;
+
   if (authorInput.value.length >= 4) {
     fourSymblol.style.color = "#14D81C";
   } else {
     isError = true;
+    symbolsErr = true;
     fourSymblol.style.color = "#85858D";
   }
+
   const splitedValue = authorInput.value.split("");
   if (
     splitedValue.includes(" ") &&
@@ -147,17 +164,37 @@ authorInput.addEventListener("input", () => {
   } else {
     twoWords.style.color = "#85858D";
     isError = true;
+    twoWordsErr = true;
   }
+
   const georgianRegex = /[\u10A0-\u10FF]/;
   if (georgianRegex.test(authorInput.value)) {
     georgianSymbol.style.color = "#14D81C";
   } else {
     georgianSymbol.style.color = "#85858D";
     isError = true;
+    georgianErr = true;
   }
 });
-console.log(blogTitle);
+
+authorInput.addEventListener("change", () => {
+  if (isError) {
+    authorInput.style.outline = "1px solid #EA1919";
+    authorInput.style.background = "#FAF2F3";
+    errorSpan.forEach((item) => {
+      item.style.color = "red";
+    });
+  } else {
+    authorInput.style.background = "white";
+    authorInput.style.outline = "1px solid #14D81C";
+    errorSpan.forEach((item) => {
+      item.style.color = "#14D81C";
+    });
+  }
+});
+
 blogTitle.addEventListener("input", () => {
+  blogTitle.style.background = "white";
   blogTitle.style.outline = "none";
   blogTitle.style.outline = "1.5px solid #5D37F3";
   if (blogTitle.value.length >= 4) {
@@ -167,24 +204,38 @@ blogTitle.addEventListener("input", () => {
     headingCharacters.style.color = "#85858D";
   }
 });
-
+blogTitle.addEventListener("change", () => {
+  if (blogTitle.value.length < 4 || blogTitle.value === "") {
+    isError = true;
+    blogTitle.style.outline = " 1px solid #EA1919";
+    blogTitle.style.background = "#FAF2F3";
+    headingCharacters.style.color = "#EA1919";
+  } else {
+    blogTitle.style.outline = "1px solid #14D81C";
+    blogTitle.style.background = "white";
+    headingCharacters.style.color = "#14D81C";
+  }
+});
 blogDesr.addEventListener("click", () => {
   blogDesr.style.background = "white";
   blogDesr.style.outline = "1.5px solid #5D37F3";
 });
 blogDesr.addEventListener("change", () => {
-  if (blogDesr.value === "") {
-    blogDesr.style.outline = "1.5px solid red";
+  if (blogDesr.value === "" || blogDesr.value.length < 4) {
+    isError = true;
+    blogDesr.style.outline = "1.5px solid #EA1919";
     blogDesr.style.background = "#FAF2F3";
   } else {
-    blogDesr.style.outline = "none";
+    blogDesr.style.outline = " 1.5px solid #14D81C";
     blogDesr.style.background = "white";
+    headingCharacters.style.color = "#14D81C";
   }
 });
 blogDate.addEventListener("click", () => {
   dateContainer.style.outline = "1.5px solid #5D37F3";
 });
 blogDate.addEventListener("blur", () => {
+  if ((blogDate.value = "")) dateContainer.style.outline = "";
   dateContainer.style.outline = "none";
 });
 
