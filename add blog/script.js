@@ -110,6 +110,27 @@ async function getButtons() {
 
       categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
     });
+
+    categorySelector.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (event.target.classList.contains("blog-type-btns")) {
+        selectCategorySpan.style.display = "none";
+        const X = document.createElement("span");
+        X.append("X");
+        let clonedButton = event.target.cloneNode(true);
+        console.log(clonedButton);
+        console.log(X);
+        clonedButton.append(X);
+
+        categoryList.appendChild(clonedButton);
+      }
+    });
+    categoryList.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (event.target.textContent === "X") {
+        event.target.parentElement.remove();
+      }
+    });
   } catch (error) {
     console.error("Error fetching data:", error);
   }
