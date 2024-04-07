@@ -393,3 +393,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .darker {
   opacity: 3;
 }
+.blog-type-btns {
+  border-radius: 30px;
+  padding: 8px;
+}

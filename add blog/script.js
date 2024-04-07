@@ -91,8 +91,32 @@ const addBlog = async () => {
       types: ["მარკეტი", "კვლევა"],
     }),
   });
+
   console.log(response);
 };
+let buttonArr = [];
+
+async function getButtons() {
+  try {
+    const response = await fetch(
+      "https://george.pythonanywhere.com/api/categories/?fbclid=IwAR2Pd6I_ZErVTAitXhLURdYgc6n9oPHC82KSmODMQCqK3e-lr76xJWawXF8_aem_AUUE9aDvLBti-daJl09LRsicTf-ngylg8US2U_v26VUkXefTFNysCCGj3Gp2K-_1YQRA9O494DL7TNYn0jSpQZs0"
+    );
+    const data = await response.json();
+    const correctData = data.slice(0, 6);
+    console.log(correctData);
+    correctData.forEach((item) => {
+      const button = document.createElement("button");
+      buttonArr.push(button);
+
+      categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+console.log(buttonArr);
+getButtons();
+
 arrowDown.addEventListener("click", () => {
   categoryContainer.style.outline = "1.5px solid #5D37F3";
   arrowDown.classList.toggle("turn-down");
@@ -103,35 +127,6 @@ arrowDown.addEventListener("click", () => {
     categoryContainer.style.outline = "1px solid #E4E3EB";
   }
 });
-let array = [];
-let finalArray;
-const deleteType = document.createElement("img");
-deleteType.setAttribute("src", "../imgs/icons8-close-button-32.png");
-deleteType.classList.add("delete-blog-type");
-
-typeButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    selectCategorySpan.style.display = "none";
-    if (!array.includes(button)) {
-      let clonedButton = button.cloneNode(true);
-      let clonedDeleteBtn = deleteType.cloneNode(true);
-      categoryList.appendChild(clonedButton);
-      clonedButton.appendChild(clonedDeleteBtn);
-      clonedButton.classList.add("darker");
-      array.push(button);
-
-      clonedDeleteBtn.addEventListener("click", () => {
-        clonedButton.remove();
-        array = array.filter((btn) => btn !== button);
-        if (array.length === 0) {
-          selectCategorySpan.style.display = "block";
-        }
-      });
-    }
-  });
-});
-// Assuming errorSpan is properly defined elsewhere in your code
-
 let isError = false;
 let twoWordsErr = false;
 let georgianErr = false;
@@ -142,7 +137,6 @@ authorInput.addEventListener("input", () => {
   authorInput.style.outline = "none";
   authorInput.style.outline = "1.5px solid #5D37F3";
 
-  // Reset errors
   isError = false;
   twoWordsErr = false;
   georgianErr = false;
