@@ -15,7 +15,6 @@ const categorySelector = document.querySelector(".categories");
 const typeButtons = document.querySelectorAll(".blog-type");
 const categoryList = document.querySelector(".category-list");
 const selectCategorySpan = document.querySelector(".select-category");
-let deleteImages = document.querySelectorAll(".delete-image");
 const fourSymblol = document.getElementById("4-symbol");
 const headingCharacters = document.querySelector(".symbol-limit");
 const twoWords = document.getElementById("two-words");
@@ -25,6 +24,8 @@ const dateContainer = document.querySelector(".date-input");
 const emailContainer = document.querySelector(".email-container");
 const errorSpan = document.querySelectorAll(".error-span");
 const descrSymbol = document.querySelector(".description-symbol");
+let blogTypeBtns = document.querySelectorAll(".blog-type-btns");
+
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -103,39 +104,51 @@ async function getButtons() {
     );
     const data = await response.json();
     const correctData = data.slice(0, 6);
-    console.log(correctData);
     correctData.forEach((item) => {
-      const button = document.createElement("button");
-      buttonArr.push(button);
-
       categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
+      blogTypeBtns = document.querySelectorAll(".blog-type-btns");
     });
-
+    blogTypeBtns.forEach((item) => {
+      item.addEventListener("click", () => {});
+    });
     categorySelector.addEventListener("click", (event) => {
       event.preventDefault();
+      if (buttonArr.includes(event.target.textContent.trim())) return;
+      if (buttonArr.includes(event.target.textContent.trim())) return;
+      buttonArr.push(event.target.textContent.trim());
+      console.log(buttonArr);
       if (event.target.classList.contains("blog-type-btns")) {
         selectCategorySpan.style.display = "none";
         const X = document.createElement("span");
         X.append("X");
         let clonedButton = event.target.cloneNode(true);
-        console.log(clonedButton);
-        console.log(X);
+        clonedButton.classList.add("cloned-btn-styles");
         clonedButton.append(X);
-
         categoryList.appendChild(clonedButton);
       }
     });
+
     categoryList.addEventListener("click", (event) => {
       event.preventDefault();
+      let parentBtn = event.target.parentElement;
+      parentBtn = parentBtn.textContent.trim().split("X")[0];
+
+      buttonArr = buttonArr.filter((item) => {
+        return item !== parentBtn;
+      });
       if (event.target.textContent === "X") {
         event.target.parentElement.remove();
+      }
+      if (categoryList.children.length == 1) {
+        selectCategorySpan.style.display = "block";
+      } else {
+        selectCategorySpan.style.display = "none";
       }
     });
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
-console.log(buttonArr);
 getButtons();
 
 arrowDown.addEventListener("click", () => {
@@ -246,10 +259,11 @@ blogDesr.addEventListener("change", () => {
     descrSymbol.style.color = "#14D81C";
   }
 });
-blogDate.addEventListener("click", () => {
+blogDate.addEventListener("click", (e) => {
   dateContainer.style.outline = "1.5px solid #5D37F3";
 });
-blogDate.addEventListener("blur", () => {
+blogDate.addEventListener("blur", (e) => {
+  e.preventDefault();
   if ((blogDate.value = "")) dateContainer.style.outline = "";
   dateContainer.style.outline = "none";
 });

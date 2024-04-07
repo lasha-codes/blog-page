@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Fira Sans";
+  font-family: FiraGO;
   font-weight: 500;
 }
 html {
@@ -286,57 +286,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 288px;
 }
 .categories button {
-  all: unset;
+  border: none;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
 }
-.market {
-  background: rgba(255, 184, 47, 0.08);
-  color: #d6961c;
-}
-.market button {
-  color: #d6961c !important;
-}
-.application {
-  background: rgba(28, 214, 125, 0.08);
-  color: #15c972;
-}
-.application button {
-  color: #15c972 !important;
-}
-.AI {
-  background: #eee1f7;
-  color: #b71fdd;
-  min-width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.AI button {
-  color: #b71fdd !important;
-}
-.UI {
-  background: rgba(250, 87, 87, 0.08);
-  color: #dc2828;
-}
-.UI button {
-  color: #dc2828 !important;
-}
-.research {
-  background: #e9efe9;
-  color: #60be16;
-}
-.research button {
-  color: #60be16 !important;
-}
-.figma {
-  background: rgba(8, 210, 174, 0.08);
-  color: #1ac7a8;
-}
-.figma button {
-  color: #1ac7a8;
-}
+
 #arrow-down {
   cursor: pointer;
   transition: all 300ms;
@@ -370,7 +325,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .category-list button {
-  all: unset;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -396,4 +350,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .blog-type-btns {
   border-radius: 30px;
   padding: 8px;
+}
+.cloned-btn-styles {
+  padding: 8px;
+  border: 2px solid black;
 }
