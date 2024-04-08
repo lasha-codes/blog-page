@@ -355,3 +355,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 8px;
   border: 2px solid black;
 }
+.email-error {
+  border: 1px solid #ea1919;
+  background: #faf2f3;
+}
+.email-success {
+  border: 1px solid #14d81c;
+  background: #f8fff8;
+}
+.mail-err-container {
+  display: none;
+  gap: 8px;
+}

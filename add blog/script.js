@@ -25,6 +25,7 @@ const emailContainer = document.querySelector(".email-container");
 const errorSpan = document.querySelectorAll(".error-span");
 const descrSymbol = document.querySelector(".description-symbol");
 let blogTypeBtns = document.querySelectorAll(".blog-type-btns");
+const emailErr = document.querySelector(".mail-err-container");
 
 let base64;
 const convertToBase64 = (file) => {
@@ -145,6 +146,10 @@ async function getButtons() {
   }
 }
 getButtons();
+categoryList.addEventListener("change", (event) => {
+  event.preventDefault();
+  // console.log(categoryList.children);
+});
 
 arrowDown.addEventListener("click", () => {
   categoryContainer.style.outline = "1.5px solid #5D37F3";
@@ -258,20 +263,30 @@ blogDate.addEventListener("click", (e) => {
   dateContainer.style.outline = "1.5px solid #5D37F3";
 });
 blogDate.addEventListener("change", (e) => {
-  if (blogDate.value === "") dateContainer.style.outline = "";
-  dateContainer.style.outline = "none";
+  if (blogDate.value === "") {
+    isError = true;
+    dateContainer.style.border = "1px solid #EA1919";
+  } else {
+    dateContainer.style.outline = "1px solid #14D81C";
+  }
 });
 
 userMail.addEventListener("click", () => {
+  if (userMail.classList.contains("email-error")) return;
   userMail.style.outline = "1.5px solid #5D37F3";
 });
 
-userMail.addEventListener("change", () => {
+userMail.addEventListener("change", (e) => {
+  e.preventDefault();
   const validEmail = userMail.value.split("@");
   if (validEmail[1] !== "redberry.ge") {
     isError = true;
-    console.log("ur gay");
+    e.target.style.outline = "none";
+    userMail.classList.add("email-error");
+    emailErr.style.display = "flex";
   } else {
-    console.log("ur still gay lol");
+    userMail.classList.remove("email-error");
+    userMail.classList.add("email-success");
+    emailErr.style.display = "none  ";
   }
 });
