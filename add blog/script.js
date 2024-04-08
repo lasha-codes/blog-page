@@ -290,24 +290,22 @@ userMail.addEventListener("change", (e) => {
     emailErr.style.display = "none";
   }
 });
-// Function to check if all input fields are valid
+
 function validateInputs() {
-  // Check conditions for each input field and return false if any condition fails
   if (
-    fileInput.files.length === 0 || // Check if a file is selected
-    authorInput.value.length < 4 || // Check author input length
-    blogTitle.value.length < 4 || // Check blog title length
-    blogDesr.value.length < 4 || // Check blog description length
-    blogDate.value === "" || // Check if blog date is selected
-    userMail.value.split("@")[1] !== "redberry.ge" // Check email format
+    fileInput.files.length === 0 ||
+    authorInput.value.length < 4 ||
+    blogTitle.value.length < 4 ||
+    blogDesr.value.length < 4 ||
+    blogDate.value === "" ||
+    userMail.value.split("@")[1] !== "redberry.ge"
   ) {
     return false;
   }
-  // Return true if all conditions pass
+
   return true;
 }
 
-// Function to toggle submit button class based on input validation
 function toggleSubmitButton() {
   if (validateInputs()) {
     submitBtn.classList.add("active-submit");

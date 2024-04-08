@@ -264,6 +264,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #move-arrow {
   position: absolute;
   left: 5%;
+  top: 10%;
+  cursor: pointer;
 }
 .blog-type {
   display: flex;
@@ -361,6 +363,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   gap: 8px;
 }
 .active-submit {
+  transition: 0.3s;
   background: #5d37f3;
   cursor: pointer;
+}
+
+.active-submit:hover {
+  background-color: purple;
 }
