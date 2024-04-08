@@ -315,3 +315,15 @@ function toggleSubmitButton() {
     submitBtn.classList.remove("active-submit");
   }
 }
+
+fileInput.addEventListener("change", toggleSubmitButton);
+authorInput.addEventListener("input", toggleSubmitButton);
+blogTitle.addEventListener("input", toggleSubmitButton);
+blogDesr.addEventListener("input", toggleSubmitButton);
+blogDate.addEventListener("change", toggleSubmitButton);
+userMail.addEventListener("change", toggleSubmitButton);
+categoryList.addEventListener("click", toggleSubmitButton);
+closeBtn.addEventListener("click", toggleSubmitButton);
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+});
