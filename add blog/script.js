@@ -158,10 +158,8 @@ arrowDown.addEventListener("click", () => {
   categorySelector.classList.toggle("visible-selector");
 
   if (categoryList.children.length > 1) {
-    isError = false;
     categoryContainer.style.outline = "1px solid  #14D81C";
   } else {
-    isError = true;
   }
 });
 authorInput.addEventListener("input", () => {
@@ -298,7 +296,8 @@ function validateInputs() {
     blogTitle.value.length < 4 ||
     blogDesr.value.length < 4 ||
     blogDate.value === "" ||
-    userMail.value.split("@")[1] !== "redberry.ge"
+    userMail.value.split("@")[1] !== "redberry.ge" ||
+    categoryList.children.length === 1
   ) {
     return false;
   }
