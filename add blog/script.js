@@ -81,23 +81,6 @@ fileInput.addEventListener("change", async () => {
   base64 = await convertToBase64(fileInput.files[0]);
 });
 
-const addBlog = async () => {
-  const response = await fetch("http://localhost:4000/add-blog", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      image: base64,
-      author: authorInput.value,
-      title: blogTitle.value,
-      description: blogDesr.value,
-      date: blogDate.value,
-      email: userMail.value,
-      types: ["მარკეტი", "კვლევა"],
-    }),
-  });
-
-  console.log(response);
-};
 let buttonArr = [];
 async function getButtons() {
   try {
@@ -174,11 +157,11 @@ authorInput.addEventListener("input", () => {
     isError = true;
   }
 
-  const splitedValue = authorInput.value.split("");
-  if (
-    splitedValue.includes(" ") &&
-    splitedValue[splitedValue.length - 1] !== " "
-  ) {
+  let splitedValue = authorInput.value.split(" ");
+  splitedValue = splitedValue?.filter((word) => word !== "");
+
+  console.log(splitedValue);
+  if (splitedValue[0]?.trim() && splitedValue[1]?.trim()) {
     isError = false;
     twoWords.style.color = "#14D81C";
   } else {
@@ -308,8 +291,10 @@ function validateInputs() {
 function toggleSubmitButton() {
   if (validateInputs()) {
     submitBtn.classList.add("active-submit");
+    return true;
   } else {
     submitBtn.classList.remove("active-submit");
+    return false;
   }
 }
 
@@ -321,6 +306,23 @@ blogDate.addEventListener("change", toggleSubmitButton);
 userMail.addEventListener("change", toggleSubmitButton);
 categoryList.addEventListener("click", toggleSubmitButton);
 closeBtn.addEventListener("click", toggleSubmitButton);
-submitBtn.addEventListener("click", (e) => {
+
+submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
+  if (toggleSubmitButton()) {
+    const response = await fetch("http://localhost:4000/add-blog", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image: base64,
+        author: authorInput.value,
+        title: blogTitle.value,
+        description: blogDesr.value,
+        date: blogDate.value,
+        email: userMail.value,
+        types: buttonArr,
+      }),
+    });
+    console.log(response);
+  }
 });
