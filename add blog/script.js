@@ -308,3 +308,10 @@ function validateInputs() {
 }
 
 // Function to toggle submit button class based on input validation
+function toggleSubmitButton() {
+  if (validateInputs()) {
+    submitBtn.classList.add("active-submit");
+  } else {
+    submitBtn.classList.remove("active-submit");
+  }
+}
