@@ -97,7 +97,6 @@ const addBlog = async () => {
   console.log(response);
 };
 let buttonArr = [];
-
 async function getButtons() {
   try {
     const response = await fetch(
@@ -113,7 +112,7 @@ async function getButtons() {
       event.preventDefault();
       if (buttonArr.includes(event.target.textContent.trim())) return;
       buttonArr.push(event.target.textContent.trim());
-      console.log(buttonArr);
+
       if (event.target.classList.contains("blog-type-btns")) {
         selectCategorySpan.style.display = "none";
         const X = document.createElement("span");
@@ -140,25 +139,28 @@ async function getButtons() {
       } else {
         selectCategorySpan.style.display = "none";
       }
+      if (categoryList.children.length > 1) {
+        categoryContainer.style.outline = "1px solid #14D81C";
+      }
     });
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
 getButtons();
-categoryList.addEventListener("change", (event) => {
-  event.preventDefault();
-  // console.log(categoryList.children);
-});
 
 arrowDown.addEventListener("click", () => {
   categoryContainer.style.outline = "1.5px solid #5D37F3";
+
   arrowDown.classList.toggle("turn-down");
   categorySelector.classList.toggle("visible-selector");
   if (categorySelector.classList.contains("visible-selector")) {
-    categoryContainer.style.outline = "1.5px solid #5D37F3";
+    categoryContainer.style.outline = "1px solid #5D37F3";
   } else {
     categoryContainer.style.outline = "1px solid #E4E3EB";
+  }
+  if (categoryList.children.length > 1) {
+    categoryContainer.style.outline = "1px solid  #14D81C";
   }
 });
 let isError = false;
@@ -172,9 +174,6 @@ authorInput.addEventListener("input", () => {
   authorInput.style.outline = "1.5px solid #5D37F3";
 
   isError = false;
-  twoWordsErr = false;
-  georgianErr = false;
-  symbolsErr = false;
 
   if (authorInput.value.length >= 4) {
     fourSymblol.style.color = "#14D81C";
@@ -193,7 +192,6 @@ authorInput.addEventListener("input", () => {
   } else {
     twoWords.style.color = "#85858D";
     isError = true;
-    twoWordsErr = true;
   }
 
   const georgianRegex = /[\u10A0-\u10FF]/;
@@ -247,15 +245,16 @@ blogTitle.addEventListener("change", () => {
 blogDesr.addEventListener("click", () => {
   blogDesr.style.background = "white";
   blogDesr.style.outline = "1.5px solid #5D37F3";
+  descrSymbol.style.color = "#85858D";
 });
 blogDesr.addEventListener("change", () => {
   if (blogDesr.value === "" || blogDesr.value.length < 4) {
     isError = true;
     blogDesr.style.outline = "1.5px solid #EA1919";
     blogDesr.style.background = "#FAF2F3";
+    descrSymbol.style.color = "#EA1919";
   } else {
     blogDesr.style.outline = " 1.5px solid #14D81C";
-
     descrSymbol.style.color = "#14D81C";
   }
 });
@@ -263,6 +262,7 @@ blogDate.addEventListener("click", (e) => {
   dateContainer.style.outline = "1.5px solid #5D37F3";
 });
 blogDate.addEventListener("change", (e) => {
+  e.preventDefault();
   if (blogDate.value === "") {
     isError = true;
     dateContainer.style.border = "1px solid #EA1919";
