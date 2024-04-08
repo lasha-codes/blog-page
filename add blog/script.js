@@ -106,14 +106,10 @@ async function getButtons() {
     const correctData = data.slice(0, 6);
     correctData.forEach((item) => {
       categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
-      blogTypeBtns = document.querySelectorAll(".blog-type-btns");
     });
-    blogTypeBtns.forEach((item) => {
-      item.addEventListener("click", () => {});
-    });
+
     categorySelector.addEventListener("click", (event) => {
       event.preventDefault();
-      if (buttonArr.includes(event.target.textContent.trim())) return;
       if (buttonArr.includes(event.target.textContent.trim())) return;
       buttonArr.push(event.target.textContent.trim());
       console.log(buttonArr);
@@ -132,7 +128,6 @@ async function getButtons() {
       event.preventDefault();
       let parentBtn = event.target.parentElement;
       parentBtn = parentBtn.textContent.trim().split("X")[0];
-
       buttonArr = buttonArr.filter((item) => {
         return item !== parentBtn;
       });
@@ -262,15 +257,21 @@ blogDesr.addEventListener("change", () => {
 blogDate.addEventListener("click", (e) => {
   dateContainer.style.outline = "1.5px solid #5D37F3";
 });
-blogDate.addEventListener("blur", (e) => {
-  e.preventDefault();
-  if ((blogDate.value = "")) dateContainer.style.outline = "";
+blogDate.addEventListener("change", (e) => {
+  if (blogDate.value === "") dateContainer.style.outline = "";
   dateContainer.style.outline = "none";
 });
 
 userMail.addEventListener("click", () => {
   userMail.style.outline = "1.5px solid #5D37F3";
 });
+
 userMail.addEventListener("change", () => {
-  userMail.style.outline = "none";
+  const validEmail = userMail.value.split("@");
+  if (validEmail[1] !== "redberry.ge") {
+    isError = true;
+    console.log("ur gay");
+  } else {
+    console.log("ur still gay lol");
+  }
 });
