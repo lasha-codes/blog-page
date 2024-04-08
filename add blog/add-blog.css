@@ -336,34 +336,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 8px 16px;
   height: auto;
 }
-.category-list button img {
-  width: 8px;
-  height: 8px;
+.category-list button span {
   cursor: pointer;
 }
 .delete-blog-type {
   width: 8px;
 }
-.darker {
-  opacity: 3;
-}
+
 .blog-type-btns {
   border-radius: 30px;
   padding: 8px;
 }
-.cloned-btn-styles {
-  padding: 8px;
-  border: 2px solid black;
-}
+
 .email-error {
-  border: 1px solid #ea1919;
-  background: #faf2f3;
+  outline: 1px solid #ea1919 !important;
+  background: #faf2f3 !important;
 }
 .email-success {
-  border: 1px solid #14d81c;
-  background: #f8fff8;
+  outline: 1px solid #14d81c !important;
+  background: #f8fff8 !important;
 }
 .mail-err-container {
   display: none;
   gap: 8px;
+}
+.active-submit {
+  background: #5d37f3;
+  cursor: pointer;
 }

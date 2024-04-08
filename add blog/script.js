@@ -9,7 +9,7 @@ const blogTitle = document.getElementById("blog-title");
 const blogDesr = document.getElementById("blog-description");
 const blogDate = document.getElementById("blog-date");
 const userMail = document.getElementById("email");
-const submitBtn = document.getElementById("submit");
+const submitBtn = document.querySelector(".submit-container");
 const arrowDown = document.getElementById("arrow-down");
 const categorySelector = document.querySelector(".categories");
 const typeButtons = document.querySelectorAll(".blog-type");
@@ -26,7 +26,7 @@ const errorSpan = document.querySelectorAll(".error-span");
 const descrSymbol = document.querySelector(".description-symbol");
 let blogTypeBtns = document.querySelectorAll(".blog-type-btns");
 const emailErr = document.querySelector(".mail-err-container");
-
+let isError;
 let base64;
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -59,13 +59,15 @@ dropZone.addEventListener("drop", (event) => {
 });
 function checkSelected() {
   if (fileInput.files[0].name) {
+    isError = false;
     selectedImg.style.display = "flex";
     dropZone.style.display = "none";
     imageName.innerHTML = fileInput.files[0].name;
   } else {
+    isError = true;
     selectedImg.style.display = "none";
     dropZone.style.display = "flex";
-    imageName.innerHTML = fileInput.files[0].name;
+    imageName.innerHTML = "";
   }
 }
 fileInput.addEventListener("change", checkSelected);
@@ -154,33 +156,24 @@ arrowDown.addEventListener("click", () => {
 
   arrowDown.classList.toggle("turn-down");
   categorySelector.classList.toggle("visible-selector");
-  if (categorySelector.classList.contains("visible-selector")) {
-    categoryContainer.style.outline = "1px solid #5D37F3";
-  } else {
-    categoryContainer.style.outline = "1px solid #E4E3EB";
-  }
+
   if (categoryList.children.length > 1) {
+    isError = false;
     categoryContainer.style.outline = "1px solid  #14D81C";
+  } else {
+    isError = true;
   }
 });
-let isError = false;
-let twoWordsErr = false;
-let georgianErr = false;
-let symbolsErr = false;
-
 authorInput.addEventListener("input", () => {
   authorInput.style.background = "white";
   authorInput.style.outline = "none";
   authorInput.style.outline = "1.5px solid #5D37F3";
 
-  isError = false;
-
   if (authorInput.value.length >= 4) {
     fourSymblol.style.color = "#14D81C";
+    isError = false;
   } else {
     isError = true;
-    symbolsErr = true;
-    fourSymblol.style.color = "#85858D";
   }
 
   const splitedValue = authorInput.value.split("");
@@ -188,6 +181,7 @@ authorInput.addEventListener("input", () => {
     splitedValue.includes(" ") &&
     splitedValue[splitedValue.length - 1] !== " "
   ) {
+    isError = false;
     twoWords.style.color = "#14D81C";
   } else {
     twoWords.style.color = "#85858D";
@@ -197,10 +191,10 @@ authorInput.addEventListener("input", () => {
   const georgianRegex = /[\u10A0-\u10FF]/;
   if (georgianRegex.test(authorInput.value)) {
     georgianSymbol.style.color = "#14D81C";
+    isError = false;
   } else {
     georgianSymbol.style.color = "#85858D";
     isError = true;
-    georgianErr = true;
   }
 });
 
@@ -225,6 +219,7 @@ blogTitle.addEventListener("input", () => {
   blogTitle.style.outline = "none";
   blogTitle.style.outline = "1.5px solid #5D37F3";
   if (blogTitle.value.length >= 4) {
+    isError = false;
     headingCharacters.style.color = "#14D81C";
   } else {
     isError = true;
@@ -234,10 +229,11 @@ blogTitle.addEventListener("input", () => {
 blogTitle.addEventListener("change", () => {
   if (blogTitle.value.length < 4 || blogTitle.value === "") {
     isError = true;
-    blogTitle.style.outline = " 1px solid #EA1919";
+    blogTitle.style.outline = "1px solid #EA1919";
     blogTitle.style.background = "#FAF2F3";
     headingCharacters.style.color = "#EA1919";
   } else {
+    isError = false;
     blogTitle.style.outline = "1px solid #14D81C";
     blogTitle.style.background = "white";
   }
@@ -254,6 +250,7 @@ blogDesr.addEventListener("change", () => {
     blogDesr.style.background = "#FAF2F3";
     descrSymbol.style.color = "#EA1919";
   } else {
+    isError = false;
     blogDesr.style.outline = " 1.5px solid #14D81C";
     descrSymbol.style.color = "#14D81C";
   }
@@ -262,17 +259,20 @@ blogDate.addEventListener("click", (e) => {
   dateContainer.style.outline = "1.5px solid #5D37F3";
 });
 blogDate.addEventListener("change", (e) => {
-  e.preventDefault();
   if (blogDate.value === "") {
     isError = true;
-    dateContainer.style.border = "1px solid #EA1919";
+    dateContainer.style.outline = "1px solid #EA1919";
   } else {
+    isError = false;
     dateContainer.style.outline = "1px solid #14D81C";
   }
 });
 
 userMail.addEventListener("click", () => {
-  if (userMail.classList.contains("email-error")) return;
+  if (userMail.classList.contains("email-error")) {
+    return;
+  }
+
   userMail.style.outline = "1.5px solid #5D37F3";
 });
 
@@ -281,12 +281,30 @@ userMail.addEventListener("change", (e) => {
   const validEmail = userMail.value.split("@");
   if (validEmail[1] !== "redberry.ge") {
     isError = true;
-    e.target.style.outline = "none";
     userMail.classList.add("email-error");
     emailErr.style.display = "flex";
   } else {
+    isError = false;
     userMail.classList.remove("email-error");
     userMail.classList.add("email-success");
-    emailErr.style.display = "none  ";
+    emailErr.style.display = "none";
   }
 });
+// Function to check if all input fields are valid
+function validateInputs() {
+  // Check conditions for each input field and return false if any condition fails
+  if (
+    fileInput.files.length === 0 || // Check if a file is selected
+    authorInput.value.length < 4 || // Check author input length
+    blogTitle.value.length < 4 || // Check blog title length
+    blogDesr.value.length < 4 || // Check blog description length
+    blogDate.value === "" || // Check if blog date is selected
+    userMail.value.split("@")[1] !== "redberry.ge" // Check email format
+  ) {
+    return false;
+  }
+  // Return true if all conditions pass
+  return true;
+}
+
+// Function to toggle submit button class based on input validation
