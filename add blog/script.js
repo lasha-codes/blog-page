@@ -30,6 +30,7 @@ const blogAddedWindow = document.querySelector(".blog-added-window");
 const windowClose = document.querySelector(".window-close");
 const returnMainPage = document.querySelector(".return-main-page");
 let clonedBtns = document.querySelectorAll(".cloned-btn-styles");
+const main = document.getElementById("main");
 let isError;
 let base64 = localStorage.getItem("base64");
 const convertToBase64 = (file) => {
@@ -461,7 +462,7 @@ submitBtn.addEventListener("click", async (e) => {
       if (!response.ok) throw new Error("failed Posting data");
       clonedBtns = document.querySelectorAll(".cloned-btn-styles");
       console.log(response);
-      document.body.style.opacity = "0.25";
+      main.style.opacity = "0.25";
       blogAddedWindow.classList.add("active-window");
       fileInput.value = "";
       selectedImg.style.display = "none";
@@ -492,7 +493,7 @@ submitBtn.addEventListener("click", async (e) => {
 });
 windowClose.addEventListener("click", () => {
   blogAddedWindow.style.display = "none";
-  document.body.style.opacity = "1";
+  main.style.opacity = "1";
 });
 returnMainPage.addEventListener("click", () => {
   document.location.href = "../index.html";
