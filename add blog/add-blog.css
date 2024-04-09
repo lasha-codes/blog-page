@@ -373,3 +373,48 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .active-submit:hover {
   background-color: purple;
 }
+.blog-added-window {
+  display: none;
+  padding: 18px 24px 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  width: 480px;
+  height: 300px;
+  border-radius: 12px;
+  background: #fff;
+}
+.window-close {
+  position: absolute;
+  right: 12%;
+}
+.added-successfully {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 35px;
+}
+.added-successfully h2 {
+  color: #1a1a1f;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+.return-main-page {
+  margin-top: 48px;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  background: #5d37f3;
+  height: 40px;
+}
+.return-main-page button {
+  all: unset;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}

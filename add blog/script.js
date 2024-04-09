@@ -26,6 +26,9 @@ const errorSpan = document.querySelectorAll(".error-span");
 const descrSymbol = document.querySelector(".description-symbol");
 let blogTypeBtns = document.querySelectorAll(".blog-type-btns");
 const emailErr = document.querySelector(".mail-err-container");
+const blogAddedWindow = document.querySelector(".blog-added-window");
+const windowClose = document.querySelector(".window-close");
+const returnMainPage = document.querySelector(".return-main-page");
 let isError;
 let base64 = localStorage.getItem("base64");
 const convertToBase64 = (file) => {
@@ -446,5 +449,12 @@ submitBtn.addEventListener("click", async (e) => {
       }),
     });
     console.log(response);
+    blogAddedWindow.style.display = "flex";
   }
+});
+windowClose.addEventListener("click", () => {
+  blogAddedWindow.style.display = "none";
+});
+returnMainPage.addEventListener("click", () => {
+  document.location.href = "../index.html";
 });
