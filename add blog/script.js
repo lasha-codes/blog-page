@@ -92,6 +92,7 @@ fileInput.addEventListener("change", async () => {
   localStorage.setItem("base64", base64);
   localStorage.setItem("pathName", fileInput.files[0].name);
 });
+
 function storeImage() {
   const filePath = localStorage.getItem("pathName");
   console.log(filePath);
@@ -107,15 +108,65 @@ function storeImage() {
     imageName.innerHTML = "";
   }
 }
-storeImage();
 let buttonArr = [];
+
+function getInputValues() {
+  const authorValue = localStorage.getItem("authorInput");
+  const titleValue = localStorage.getItem("blogTitle");
+  const descValue = localStorage.getItem("blogDesc");
+  const emailValue = localStorage.getItem("email");
+  const dateValue = localStorage.getItem("blogDate");
+  const buttonsArray = localStorage.getItem("buttonArr");
+  authorInput.value = authorValue;
+  blogTitle.value = titleValue;
+  blogDesr.value = descValue;
+  userMail.value = emailValue;
+  blogDate.value = dateValue;
+
+  const finalbuttonsArray = buttonsArray !== "" ? buttonsArray.split(",") : [];
+
+  buttonArr = finalbuttonsArray;
+  console.log(buttonArr);
+  buttonArr.map((text) => {
+    let backgroundColor;
+
+    if (text === "აპლიკაცია") {
+      backgroundColor = "#1CD67D";
+    }
+    if (text === "მარკეტი") {
+      console.log("market-exists");
+      backgroundColor = "#FFB82F";
+    }
+    if (text === "ხელოვნური ინტელექტი") {
+      backgroundColor = "#B11CD6";
+      console.log("AI exists");
+    }
+    if (text === "Figma") {
+      backgroundColor = "#08D2AE";
+      console.log("figma exists");
+    }
+    if (text === "კვლევა") {
+      backgroundColor = "#70CF25";
+      console.log("kvleva exists");
+    }
+    if (text === "UI/UX") {
+      backgroundColor = "#FA5757";
+      console.log("UI/UX exists");
+    }
+    categoryList.innerHTML += `<button style="color:white; background-color:${backgroundColor}"; class="blog-type-btns">${text}</button>`;
+  });
+}
+storeImage();
+getInputValues();
 async function getButtons() {
   try {
     const response = await fetch(
       "https://george.pythonanywhere.com/api/categories/?fbclid=IwAR2Pd6I_ZErVTAitXhLURdYgc6n9oPHC82KSmODMQCqK3e-lr76xJWawXF8_aem_AUUE9aDvLBti-daJl09LRsicTf-ngylg8US2U_v26VUkXefTFNysCCGj3Gp2K-_1YQRA9O494DL7TNYn0jSpQZs0"
     );
     const data = await response.json();
+
     const correctData = data.slice(0, 6);
+    console.log(correctData);
     correctData.forEach((item) => {
       categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
     });
@@ -174,9 +225,7 @@ arrowDown.addEventListener("click", () => {
   } else {
   }
 });
-function storeAuthorData() {
-  localStorage.setItem("authorInput");
-}
+
 authorInput.addEventListener("input", () => {
   authorInput.style.background = "white";
   authorInput.style.outline = "none";
