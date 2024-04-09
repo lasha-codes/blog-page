@@ -124,7 +124,7 @@ async function getButtons() {
       event.preventDefault();
       if (buttonArr.includes(event.target.textContent.trim())) return;
       buttonArr.push(event.target.textContent.trim());
-
+      localStorage.setItem("buttonArr", buttonArr);
       if (event.target.classList.contains("blog-type-btns")) {
         selectCategorySpan.style.display = "none";
         const X = document.createElement("span");
@@ -143,6 +143,8 @@ async function getButtons() {
       buttonArr = buttonArr.filter((item) => {
         return item !== parentBtn;
       });
+      localStorage.setItem("buttonArr", buttonArr);
+
       if (event.target.textContent === "X") {
         event.target.parentElement.remove();
       }
@@ -172,7 +174,9 @@ arrowDown.addEventListener("click", () => {
   } else {
   }
 });
-
+function storeAuthorData() {
+  localStorage.setItem("authorInput");
+}
 authorInput.addEventListener("input", () => {
   authorInput.style.background = "white";
   authorInput.style.outline = "none";
@@ -208,13 +212,26 @@ authorInput.addEventListener("input", () => {
 });
 
 authorInput.addEventListener("change", () => {
+  let splitedValue = authorInput.value.split(" ");
+  splitedValue = splitedValue?.filter((word) => word !== "");
+
+  console.log(splitedValue);
+  if (splitedValue[0]?.trim() && splitedValue[1]?.trim()) {
+    isError = false;
+    twoWords.style.color = "#14D81C";
+  } else {
+    twoWords.style.color = "#85858D";
+    isError = true;
+  }
   if (isError) {
+    localStorage.setItem("authorInput", "");
     authorInput.style.outline = "1px solid #EA1919";
     authorInput.style.background = "#FAF2F3";
     errorSpan.forEach((item) => {
       item.style.color = "red";
     });
   } else {
+    localStorage.setItem("authorInput", authorInput.value);
     authorInput.style.background = "white";
     authorInput.style.outline = "1px solid #14D81C";
     errorSpan.forEach((item) => {
@@ -238,11 +255,13 @@ blogTitle.addEventListener("input", () => {
 blogTitle.addEventListener("change", () => {
   if (blogTitle.value.length < 4 || blogTitle.value === "") {
     isError = true;
+    localStorage.setItem("blogTitle", "");
     blogTitle.style.outline = "1px solid #EA1919";
     blogTitle.style.background = "#FAF2F3";
     headingCharacters.style.color = "#EA1919";
   } else {
     isError = false;
+    localStorage.setItem("blogTitle", blogTitle.value);
     blogTitle.style.outline = "1px solid #14D81C";
     blogTitle.style.background = "white";
   }
@@ -255,11 +274,13 @@ blogDesr.addEventListener("click", () => {
 blogDesr.addEventListener("change", () => {
   if (blogDesr.value === "" || blogDesr.value.length < 4) {
     isError = true;
+    localStorage.setItem("blogDesc", "");
     blogDesr.style.outline = "1.5px solid #EA1919";
     blogDesr.style.background = "#FAF2F3";
     descrSymbol.style.color = "#EA1919";
   } else {
     isError = false;
+    localStorage.setItem("blogDesc", blogDesr.value);
     blogDesr.style.outline = " 1.5px solid #14D81C";
     descrSymbol.style.color = "#14D81C";
   }
@@ -269,10 +290,12 @@ blogDate.addEventListener("click", (e) => {
 });
 blogDate.addEventListener("change", (e) => {
   if (blogDate.value === "") {
+    localStorage.setItem("blogDate", "");
     isError = true;
     dateContainer.style.outline = "1px solid #EA1919";
   } else {
     isError = false;
+    localStorage.setItem("blogDate", blogDate.value);
     dateContainer.style.outline = "1px solid #14D81C";
   }
 });
@@ -290,10 +313,12 @@ userMail.addEventListener("change", (e) => {
   const validEmail = userMail.value.split("@");
   if (validEmail[1] !== "redberry.ge") {
     isError = true;
+    localStorage.setItem("email", "");
     userMail.classList.add("email-error");
     emailErr.style.display = "flex";
   } else {
     isError = false;
+    localStorage.setItem("email", userMail.value);
     userMail.classList.remove("email-error");
     userMail.classList.add("email-success");
     emailErr.style.display = "none";
