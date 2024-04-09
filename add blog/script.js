@@ -27,7 +27,7 @@ const descrSymbol = document.querySelector(".description-symbol");
 let blogTypeBtns = document.querySelectorAll(".blog-type-btns");
 const emailErr = document.querySelector(".mail-err-container");
 let isError;
-let base64;
+let base64 = localStorage.getItem("base64");
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -50,14 +50,20 @@ dropZone.addEventListener("dragover", (event) => {
 dropZone.addEventListener("dragleave", (event) => {
   dropZone.classList.remove("drag-over");
 });
-dropZone.addEventListener("drop", (event) => {
+dropZone.addEventListener("drop", async (event) => {
   event.preventDefault();
   dropZone.classList.remove("drag-over");
   const files = event.dataTransfer.files;
+
   fileInput.files = files;
+  base64 = await convertToBase64(fileInput.files[0]);
+  console.log(base64);
+  localStorage.setItem("base64", base64);
+  localStorage.setItem("pathName", fileInput.files[0].name);
   checkSelected();
 });
-function checkSelected() {
+async function checkSelected() {
+  console.log(fileInput.files[0].name);
   if (fileInput.files[0].name) {
     isError = false;
     selectedImg.style.display = "flex";
@@ -71,16 +77,37 @@ function checkSelected() {
   }
 }
 fileInput.addEventListener("change", checkSelected);
+
 closeBtn.addEventListener("click", (e) => {
   fileInput.value = "";
   dropZone.style.display = "flex";
   selectedImg.style.display = "none";
   imageName.innerHTML = "";
+  localStorage.setItem("pathName", "");
+  localStorage.setItem("base64", "");
 });
 fileInput.addEventListener("change", async () => {
   base64 = await convertToBase64(fileInput.files[0]);
+  console.log(base64);
+  localStorage.setItem("base64", base64);
+  localStorage.setItem("pathName", fileInput.files[0].name);
 });
-
+function storeImage() {
+  const filePath = localStorage.getItem("pathName");
+  console.log(filePath);
+  if (filePath) {
+    isError = false;
+    selectedImg.style.display = "flex";
+    dropZone.style.display = "none";
+    imageName.innerHTML = filePath;
+  } else {
+    isError = true;
+    selectedImg.style.display = "none";
+    dropZone.style.display = "flex";
+    imageName.innerHTML = "";
+  }
+}
+storeImage();
 let buttonArr = [];
 async function getButtons() {
   try {
@@ -145,6 +172,7 @@ arrowDown.addEventListener("click", () => {
   } else {
   }
 });
+
 authorInput.addEventListener("input", () => {
   authorInput.style.background = "white";
   authorInput.style.outline = "none";

@@ -316,14 +316,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 100%;
   padding: 6px 0;
   overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-y: scroll;
   gap: 7px;
   align-items: center;
-  width: 240px;
 }
 
 .category-list::-webkit-scrollbar {
-  height: 0.3em;
+  height: 0.4em;
 }
 
 .category-list button {
@@ -333,6 +332,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 13px;
   border-radius: 20px;
   border: none;
+  width: 100%;
 }
 .category-list div {
   padding: 8px 16px;
