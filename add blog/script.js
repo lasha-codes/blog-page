@@ -124,12 +124,10 @@ function getInputValues() {
   blogDate.value = dateValue;
 
   const finalbuttonsArray = buttonsArray !== "" ? buttonsArray.split(",") : [];
-
   buttonArr = finalbuttonsArray;
   console.log(buttonArr);
   buttonArr.map((text) => {
     let backgroundColor;
-
     if (text === "აპლიკაცია") {
       backgroundColor = "#1CD67D";
     }
@@ -151,11 +149,32 @@ function getInputValues() {
     }
     if (text === "UI/UX") {
       backgroundColor = "#FA5757";
+      display = "none";
       console.log("UI/UX exists");
     }
-    categoryList.innerHTML += `<button style="color:white; background-color:${backgroundColor}"; class="blog-type-btns">${text}</button>`;
+
+    selectCategorySpan.style.display = "none";
+    categoryList.innerHTML += `<button style="color:white; background-color:${backgroundColor}"; min-width:100px; class="blog-type-btns">${text}<span>X</span></button>`;
   });
 }
+function checkBtnArr() {
+  const btnArr = localStorage.getItem("buttonArr");
+  let splitedArr = btnArr.split(",");
+
+  splitedArr = splitedArr.filter((text) => {
+    return (
+      text === "აპლიკაცია" ||
+      text === "კვლევა" ||
+      text === "ხელოვნური ინტელექტი" ||
+      text === "Figma" ||
+      text === "მარკეტი" ||
+      text === "UI/UX"
+    );
+  });
+  console.log(splitedArr);
+  localStorage.setItem("buttonArr", splitedArr);
+}
+checkBtnArr();
 storeImage();
 getInputValues();
 async function getButtons() {
@@ -166,7 +185,7 @@ async function getButtons() {
     const data = await response.json();
 
     const correctData = data.slice(0, 6);
-    console.log(correctData);
+
     correctData.forEach((item) => {
       categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
     });
@@ -189,13 +208,14 @@ async function getButtons() {
 
     categoryList.addEventListener("click", (event) => {
       event.preventDefault();
-      let parentBtn = event.target.parentElement;
-      parentBtn = parentBtn.textContent.trim().split("X")[0];
+      let parentBtnText = event.target.parentElement.textContent
+        .trim()
+        .split("X")[0]
+        .trim();
       buttonArr = buttonArr.filter((item) => {
-        return item !== parentBtn;
+        return item.trim().toLowerCase() !== parentBtnText.toLowerCase();
       });
       localStorage.setItem("buttonArr", buttonArr);
-
       if (event.target.textContent === "X") {
         event.target.parentElement.remove();
       }
