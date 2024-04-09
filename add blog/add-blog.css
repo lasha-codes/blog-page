@@ -365,7 +365,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   gap: 8px;
 }
 .active-submit {
-  transition: 0.3s;
+  transition: 0.5s;
   background: #5d37f3;
   cursor: pointer;
 }
@@ -374,6 +374,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: purple;
 }
 .blog-added-window {
+  position: absolute;
+  transform: 0.4s;
+  animation: backwards;
   display: none;
   padding: 18px 24px 40px 24px;
   flex-direction: column;
@@ -384,6 +387,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background: #fff;
 }
 .window-close {
+  cursor: pointer;
   position: absolute;
   right: 12%;
 }
@@ -401,6 +405,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 28px;
 }
 .return-main-page {
+  cursor: pointer;
   margin-top: 48px;
   transition: 0.3s;
   display: flex;
@@ -417,4 +422,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
+}
+.return-main-page:hover {
+  background-color: purple;
+}
+.active-window {
+  display: flex;
+  opacity: 1 !important;
+  background: white !important;
 }

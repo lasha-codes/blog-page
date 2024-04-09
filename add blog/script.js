@@ -29,6 +29,7 @@ const emailErr = document.querySelector(".mail-err-container");
 const blogAddedWindow = document.querySelector(".blog-added-window");
 const windowClose = document.querySelector(".window-close");
 const returnMainPage = document.querySelector(".return-main-page");
+let clonedBtns = document.querySelectorAll(".cloned-btn-styles");
 let isError;
 let base64 = localStorage.getItem("base64");
 const convertToBase64 = (file) => {
@@ -218,10 +219,19 @@ async function getButtons() {
       buttonArr = buttonArr.filter((item) => {
         return item.trim().toLowerCase() !== parentBtnText.toLowerCase();
       });
-      localStorage.setItem("buttonArr", buttonArr);
       if (event.target.textContent === "X") {
         event.target.parentElement.remove();
       }
+      console.log(event.target.parentElement.textContent.split("X")[0].trim());
+      if (
+        event.target.parentElement.textContent.split("X")[0].trim() === "UI/U"
+      ) {
+        buttonArr = buttonArr.filter((button) => {
+          return button !== "UI/UX";
+        });
+      }
+      console.log(buttonArr);
+      localStorage.setItem("buttonArr", buttonArr);
       if (categoryList.children.length == 1) {
         selectCategorySpan.style.display = "block";
       } else {
@@ -236,7 +246,7 @@ async function getButtons() {
   }
 }
 getButtons();
-
+localStorage.setItem("authorInput", "");
 arrowDown.addEventListener("click", () => {
   categoryContainer.style.outline = "1.5px solid #5D37F3";
 
@@ -422,7 +432,6 @@ function toggleSubmitButton() {
     return false;
   }
 }
-
 fileInput.addEventListener("change", toggleSubmitButton);
 authorInput.addEventListener("input", toggleSubmitButton);
 blogTitle.addEventListener("input", toggleSubmitButton);
@@ -435,25 +444,55 @@ closeBtn.addEventListener("click", toggleSubmitButton);
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   if (toggleSubmitButton()) {
-    const response = await fetch("http://localhost:4000/add-blog", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        image: base64,
-        author: authorInput.value,
-        title: blogTitle.value,
-        description: blogDesr.value,
-        date: blogDate.value,
-        email: userMail.value,
-        types: buttonArr,
-      }),
-    });
-    console.log(response);
-    blogAddedWindow.style.display = "flex";
+    try {
+      const response = await fetch("http://localhost:4000/add-blog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image: base64,
+          author: authorInput.value,
+          title: blogTitle.value,
+          description: blogDesr.value,
+          date: blogDate.value,
+          email: userMail.value,
+          types: buttonArr,
+        }),
+      });
+      if (!response.ok) throw new Error("failed Posting data");
+      clonedBtns = document.querySelectorAll(".cloned-btn-styles");
+      console.log(response);
+      document.body.style.opacity = "0.25";
+      blogAddedWindow.classList.add("active-window");
+      fileInput.value = "";
+      selectedImg.style.display = "none";
+      dropZone.style.display = "flex";
+      imageName.innerHTML = "";
+      userMail.value = "";
+      blogDate.value = "";
+      blogTitle.value = "";
+      authorInput.value = "";
+      blogDesr.value = "";
+      console.log(blogTypeBtns);
+
+      clonedBtns.forEach((item) => item.remove());
+
+      localStorage.setItem("authorInput", "");
+      localStorage.setItem("email", "");
+      localStorage.setItem("blogDate", "");
+      localStorage.setItem("blogTitle", "");
+      localStorage.setItem("blogDesc", "");
+      localStorage.setItem("pathName", "");
+      localStorage.setItem("base64", "");
+      localStorage.setItem("buttonArr", "");
+      selectCategorySpan.style.display = "block";
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 });
 windowClose.addEventListener("click", () => {
   blogAddedWindow.style.display = "none";
+  document.body.style.opacity = "1";
 });
 returnMainPage.addEventListener("click", () => {
   document.location.href = "../index.html";
