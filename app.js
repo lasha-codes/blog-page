@@ -1,4 +1,5 @@
 const blogSection = document.querySelector(".blogs-section");
+const logInBtn = document.querySelector(".login");
 let blogTypes = [];
 async function getBlogs() {
   try {
