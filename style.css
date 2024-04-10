@@ -123,8 +123,7 @@ h1 {
   width: 408px;
   height: 328px;
   border-radius: 12px;
-  background: url("./imgs/hills-img.png") lightgray 50%;
-  background-size: cover;
+  object-fit: cover;
 }
 .blogger-info {
   display: flex;
@@ -176,4 +175,14 @@ h1 {
   color: #5d37f3;
   font-size: 1.4rem;
   line-height: 20px;
+}
+
+.blogs-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.blogs-trio {
+  display: flex;
+  gap: 32px;
 }

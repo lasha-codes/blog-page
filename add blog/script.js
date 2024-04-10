@@ -35,6 +35,10 @@ let isError;
 let base64 = localStorage.getItem("base64");
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith("image/")) {
+      reject(new Error("Invalid file type or file not provided."));
+      return;
+    }
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
@@ -46,6 +50,8 @@ const convertToBase64 = (file) => {
   });
 };
 
+// Assuming selectedImg, dropZone, fileInput, and imageName are defined elsewhere
+
 selectedImg.style.display = "none";
 dropZone.addEventListener("dragover", (event) => {
   event.preventDefault();
@@ -55,21 +61,27 @@ dropZone.addEventListener("dragover", (event) => {
 dropZone.addEventListener("dragleave", (event) => {
   dropZone.classList.remove("drag-over");
 });
+
 dropZone.addEventListener("drop", async (event) => {
   event.preventDefault();
   dropZone.classList.remove("drag-over");
   const files = event.dataTransfer.files;
 
-  fileInput.files = files;
-  base64 = await convertToBase64(fileInput.files[0]);
-  console.log(base64);
-  localStorage.setItem("base64", base64);
-  localStorage.setItem("pathName", fileInput.files[0].name);
-  checkSelected();
+  if (files.length > 0) {
+    try {
+      const base64 = await convertToBase64(files[0]);
+      console.log(base64);
+      localStorage.setItem("base64", base64);
+      localStorage.setItem("pathName", files[0].name);
+      checkSelected();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 });
+
 async function checkSelected() {
-  console.log(fileInput.files[0].name);
-  if (fileInput.files[0].name) {
+  if (fileInput.files[0]) {
     isError = false;
     selectedImg.style.display = "flex";
     dropZone.style.display = "none";
@@ -81,6 +93,7 @@ async function checkSelected() {
     imageName.innerHTML = "";
   }
 }
+
 fileInput.addEventListener("change", checkSelected);
 
 closeBtn.addEventListener("click", (e) => {
