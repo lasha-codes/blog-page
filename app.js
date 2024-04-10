@@ -1,5 +1,5 @@
 const blogSection = document.querySelector(".blogs-section");
-
+let blogTypes = [];
 async function getBlogs() {
   try {
     const response = await fetch("http://localhost:4000/get-blogs");
@@ -8,9 +8,12 @@ async function getBlogs() {
 
     data.forEach((blog) => {
       let blogDate = blog.createdAt.slice(0, 10);
-      let blogTypes = blog.types;
+      const blogDescr = blog.description.slice(0, 90);
+      blogTypes.push(blog.types);
 
-      blogSection.innerHTML += `<div class="user-blog"> <img src="${blog.image}" alt="blog-img" class="blog-img" />
+      blogSection.innerHTML += `<div class="user-blog"> <img src="${
+        blog.image
+      }" alt="blog-img" class="blog-img" />
       <div class="blogger-info">
         <span class="blogger-name">${blog.author}</span>
         <span class="publish-date">${blogDate}</span>
@@ -23,7 +26,7 @@ async function getBlogs() {
       </div>
       <div class="blog-description">
         <p>
-         ${blog.description}
+         ${blogDescr + "..."}
         </p>
       </div>
       <div class="see-all">
@@ -41,18 +44,36 @@ async function getBlogs() {
           />
           </svg></div>`;
     });
-    const typeContainer = document.querySelector(".blog-types-container");
+    const typeContainer = document.querySelectorAll(".blog-types-container");
+
     console.log(blogTypes);
-    blogTypes.map((button) => {
-      console.log(typeContainer.innerHTML);
-      let backgroundColor = "";
-      if (button === "მარკეტი") {
-        backgroundColor = "#D6961C";
-      }
-      if (button === "აპლიკაცია") {
-        backgroundColor;
-      }
-      typeContainer.innerHTML += `<button style="color:white; background-color:${backgroundColor}"; min-width:100px; class="blog-type-btns">${button}<span>X</span></button>`;
+    typeContainer.forEach((element) => {
+      console.log(blogTypes);
+      blogTypes.forEach((button) => {
+        console.log(button);
+        button.forEach((text) => {
+          let backgroundColor = "";
+          if (text === "მარკეტი") {
+            backgroundColor = "#D6961C";
+          }
+          if (text === "აპლიკაცია") {
+            backgroundColor = "#15C972";
+          }
+          if (text === "ხელოვნური ინტელექტი") {
+            backgroundColor = "#B71FDD";
+          }
+          if (text === "Figma") {
+            backgroundColor = "#08D2AE";
+          }
+          if (text === "კვლევა") {
+            backgroundColor = "#60BE16";
+          }
+          if (text === "UI/UX") {
+            backgroundColor = "#DC2828";
+          }
+          element.innerHTML += `<button style="color:white; background-color:${backgroundColor}"; min-width:100px; class="blog-type-btns">${text}</button>`;
+        });
+      });
     });
     if (!response.ok) throw new Error("Error fetching data");
   } catch (e) {

@@ -186,3 +186,15 @@ h1 {
   display: flex;
   gap: 32px;
 }
+.blog-type-btns {
+  all: unset;
+  font-size: 12px;
+  border-radius: 30px;
+  padding: 6px 10px;
+}
+.blog-types-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
