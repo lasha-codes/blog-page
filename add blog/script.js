@@ -474,9 +474,7 @@ submitBtn.addEventListener("click", async (e) => {
       authorInput.value = "";
       blogDesr.value = "";
       console.log(blogTypeBtns);
-
       clonedBtns.forEach((item) => item.remove());
-
       localStorage.setItem("authorInput", "");
       localStorage.setItem("email", "");
       localStorage.setItem("blogDate", "");
@@ -486,6 +484,17 @@ submitBtn.addEventListener("click", async (e) => {
       localStorage.setItem("base64", "");
       localStorage.setItem("buttonArr", "");
       selectCategorySpan.style.display = "block";
+      authorInput.style.outline = "none";
+      blogDate.style.outline = "none";
+      blogDesr.style.outline = "none";
+      blogTitle.style.outline = "none";
+      categoryContainer.style.outline = "none";
+      userMail.style.outline = "none";
+      errorSpan.forEach((item) => (item.style.color = "#85858D"));
+      headingCharacters.style.color = "#85858D";
+      descrSymbol.style.color = "#85858D";
+      userMail.classList.remove("email-success");
+      dateContainer.style.outline = "none";
     } catch (e) {
       console.log(e.message);
     }
