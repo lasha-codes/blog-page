@@ -1,3 +1,4 @@
+const moveToHomepage = document.getElementById("move-arrow");
 const fileInput = document.getElementById("upload-input");
 const dropZone = document.getElementById("dropZone");
 const selectedImg = document.querySelector(".selected-img");
@@ -518,5 +519,8 @@ windowClose.addEventListener("click", () => {
   main.style.opacity = "1";
 });
 returnMainPage.addEventListener("click", () => {
+  document.location.href = "../index.html";
+});
+moveToHomepage.addEventListener("click", () => {
   document.location.href = "../index.html";
 });
