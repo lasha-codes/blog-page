@@ -6,6 +6,9 @@ const emailInput = document.getElementById("email");
 const emaiLError = document.querySelector(".mail-err-container");
 const shesvla = document.querySelector(".login-container");
 const succeed = document.querySelector(".succeed");
+const closeBtn = document.querySelectorAll(".window-close");
+const addBlogBtn = document.getElementById("add-blog-btn");
+const okBtn = document.querySelector(".ok");
 let blogTypes = [];
 let typeContainers;
 
@@ -108,4 +111,21 @@ shesvla.addEventListener("click", () => {
   } else {
     emaiLError.style.display = "flex";
   }
+});
+closeBtn.forEach((item) => {
+  item.addEventListener("click", () => {
+    loginWindowContainer.style.display = "none";
+    succeed.style.display = "none";
+    if ((succeed.style.display = "flex")) {
+      addBlogBtn.style.display = "block";
+      logInBtn.replaceWith(addBlogBtn);
+    }
+  });
+});
+
+okBtn.addEventListener("click", () => {
+  loginWindowContainer.style.display = "none";
+  succeed.style.display = "none";
+  addBlogBtn.style.display = "block";
+  logInBtn.replaceWith(addBlogBtn);
 });
