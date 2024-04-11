@@ -1,5 +1,6 @@
 const blogSection = document.querySelector(".blogs-section");
 const logInBtn = document.querySelector(".login");
+const loginWindowContainer = document.querySelector(".login-window-container");
 const loginWindow = document.querySelector(".login-window");
 
 let blogTypes = [];
@@ -43,8 +44,8 @@ async function getBlogs() {
         </div>`;
 
       blogSection.innerHTML += blogHTML;
-
       const blogContainer = blogSection.lastElementChild;
+      console.log(blogContainer);
 
       const typesContainer = blogContainer.querySelector(
         ".blog-types-container"
@@ -72,10 +73,9 @@ async function getBlogs() {
             backgroundColor = "#DC2828";
             break;
           default:
-            backgroundColor = "#000000"; // default color
+            backgroundColor = "#000000";
         }
 
-        // Create the button element
         const button = document.createElement("button");
         button.classList.add("blog-type-btns");
         button.textContent = type;
@@ -92,6 +92,6 @@ async function getBlogs() {
 getBlogs();
 
 logInBtn.addEventListener("click", () => {
-  document.body.style.opacity = "";
+  loginWindowContainer.style.display = "flex";
   loginWindow.style.display = "flex";
 });

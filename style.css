@@ -198,6 +198,18 @@ h1 {
   align-items: center;
   gap: 16px;
 }
+.login-window-container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(26, 26, 31, 0.24);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
 .login-window {
   display: none;
   flex-direction: column;
@@ -276,16 +288,4 @@ h1 {
 .mail-err-container {
   display: none;
   gap: 8px;
-}
-.login-container {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(26, 26, 31, 0.24);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
 }
