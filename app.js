@@ -5,6 +5,7 @@ const loginWindow = document.querySelector(".login-window");
 const emailInput = document.getElementById("email");
 const emaiLError = document.querySelector(".mail-err-container");
 const shesvla = document.querySelector(".login-container");
+const succeed = document.querySelector(".succeed");
 let blogTypes = [];
 let typeContainers;
 
@@ -102,7 +103,7 @@ emailInput.addEventListener("click", () => {
 });
 shesvla.addEventListener("click", () => {
   if (emailInput.value === "tato@redberry.ge") {
-    console.log("ur gay");
+    succeed.style.display = "flex";
   } else {
     emaiLError.style.display = "flex";
   }

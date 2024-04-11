@@ -291,3 +291,27 @@ h1 {
   display: none;
   gap: 8px;
 }
+.succeed {
+  display: none;
+  width: 480px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 20px 24px 40px;
+}
+.succeed_h2 {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ok {
+  margin-top: 48px;
+  height: 40px;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #5d37f3;
+  width: 100%;
+}
