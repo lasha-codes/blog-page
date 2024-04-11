@@ -2,7 +2,9 @@ const blogSection = document.querySelector(".blogs-section");
 const logInBtn = document.querySelector(".login");
 const loginWindowContainer = document.querySelector(".login-window-container");
 const loginWindow = document.querySelector(".login-window");
-
+const emailInput = document.getElementById("email");
+const emaiLError = document.querySelector(".mail-err-container");
+const shesvla = document.querySelector(".login-container");
 let blogTypes = [];
 let typeContainers;
 
@@ -94,4 +96,14 @@ getBlogs();
 logInBtn.addEventListener("click", () => {
   loginWindowContainer.style.display = "flex";
   loginWindow.style.display = "flex";
+});
+emailInput.addEventListener("click", () => {
+  emailInput.style.border = "1.5px solid #5D37F3;";
+});
+shesvla.addEventListener("click", () => {
+  if (emailInput.value === "tato@redberry.ge") {
+    console.log("ur gay");
+  } else {
+    emaiLError.style.display = "flex";
+  }
 });

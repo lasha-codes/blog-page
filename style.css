@@ -255,6 +255,8 @@ h1 {
   line-height: 20px;
 }
 #email {
+  outline: none;
+  border: 1.5px solid #5d37f3;
   padding: 12px 0 12px 16px;
   width: 432px;
   height: 44px;
