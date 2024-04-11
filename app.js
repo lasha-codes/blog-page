@@ -108,6 +108,7 @@ shesvla.addEventListener("click", () => {
   if (emailInput.value === "tato@redberry.ge") {
     loginWindow.style.display = "none";
     succeed.style.display = "flex";
+    localStorage.setItem("blogAddBtn", addBlogBtn.textContent);
   } else {
     emaiLError.style.display = "flex";
   }
@@ -129,3 +130,10 @@ okBtn.addEventListener("click", () => {
   addBlogBtn.style.display = "block";
   logInBtn.replaceWith(addBlogBtn);
 });
+storeBlogAddBtn();
+function storeBlogAddBtn() {
+  if (localStorage.getItem("blogAddBtn")) {
+    addBlogBtn.style.display = "block";
+    logInBtn.style.display = "none";
+  }
+}
