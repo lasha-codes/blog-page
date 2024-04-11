@@ -217,7 +217,7 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  padding: 18px 24px 40px 24px;
+  padding: 18px 24px 0 24px;
   flex-direction: column;
   align-items: center;
   width: 480px;
@@ -290,21 +290,46 @@ h1 {
 .mail-err-container {
   display: none;
   gap: 8px;
+  position: absolute;
+  top: 60%;
 }
 .succeed {
   display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  align-items: center;
   width: 480px;
+  height: 300px;
   border-radius: 12px;
   background: #fff;
-  padding: 20px 24px 40px;
+  padding: 20px 24px;
+}
+.succeed-logo {
+  width: 64px;
+  height: 64px;
 }
 .succeed_h2 {
-  margin-top: 20px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 }
+.succeed_h2 h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
 .ok {
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #fff;
+  font-family: FiraGO;
+  font-size: 14px;
   margin-top: 48px;
   height: 40px;
   display: flex;
@@ -314,4 +339,7 @@ h1 {
   border-radius: 8px;
   background: #5d37f3;
   width: 100%;
+}
+.ok:hover {
+  background: purple;
 }

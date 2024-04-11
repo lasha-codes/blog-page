@@ -103,6 +103,7 @@ emailInput.addEventListener("click", () => {
 });
 shesvla.addEventListener("click", () => {
   if (emailInput.value === "tato@redberry.ge") {
+    loginWindow.style.display = "none";
     succeed.style.display = "flex";
   } else {
     emaiLError.style.display = "flex";
