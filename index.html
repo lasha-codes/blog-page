@@ -87,9 +87,10 @@
         </div>
       </section>
     </main>
-    <div class="login-container">
+    <div class="login-window">
       <svg
         xmlns="http://www.w3.org/2000/svg"
+        class="window-close"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -111,14 +112,15 @@
         />
       </svg>
       <div class="email-container">
-        <h2>ელ-ფოსტა</h2>
+        <h2>შესვლა</h2>
+        <span>ელ-ფოსტა</span>
         <input
           type="email"
           placeholder="Example@redberry.ge"
           id="email"
           class="input-container forms-inputs"
         />
-        <div class="mail-err-container">
+        <div class="mail-err-container" style="display: none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -150,11 +152,41 @@
             >მეილი უნდა მთავრდებოდეს @redberry.ge-ით</span
           >
         </div>
-        <div class="login" style="width: 100%">
+        <div class="login-container">
           <button class="login-btn">შესვლა</button>
         </div>
       </div>
-    
+    </div>
+    <!-- <div class="login-container">
+      <div class="login">
+        <img src="images/X.png" alt="close icon" id="close-icon" />
+        <h2>შესვლა</h2>
+        <label for="email-input">ელ-ფოსტა</label>
+        <div class="input_button">
+          <input
+            type="text"
+            id="email-input"
+            placeholder="Example@redberry.ge"
+          />
+          <span id="error-span"
+            ><img
+              src="./pages/addNewBlog/images/error-icon.svg"
+              alt="error-icon"
+            />
+            <p>ელ-ფოსტა უნდა სრულდებოდეს @redberry.ge -ით</p></span
+          >
+          <button id="submit">შესვლა</button>
+        </div>
+      </div>
+      <div class="succeed login">
+        <img src="images/X.png" alt="close icon" id="close-icon" class="x" />
+        <div class="succeed_h2">
+          <img src="images/tick-circle.svg" alt="succeed logo" />
+          <h2>წარმატებული ავტორიზაცია</h2>
+        </div>
+        <button id="submit" class="good">კარგი</button>
+      </div>
+    </div> -->
     <script src="./app.js"></script>
   </body>
 </html>
