@@ -137,3 +137,8 @@ function storeBlogAddBtn() {
     logInBtn.style.display = "none";
   }
 }
+addBlogBtn.addEventListener("click", () => {
+  console.log("sadasd");
+
+  document.location.href = "./add blog/add-blog.html";
+});
