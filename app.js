@@ -158,11 +158,22 @@ logInBtn.addEventListener("click", () => {
 emailInput.addEventListener("click", () => {
   emailInput.style.border = "1.5px solid #5D37F3;";
 });
-shesvla.addEventListener("click", () => {
+shesvla.addEventListener("click", async () => {
+  const response = await fetch("http://localhost:4000/authenticate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: emailInput.value,
+    }),
+    credentials: "include",
+  });
+  const data = await response.json();
+  console.log(data);
   if (emailInput.value === "tato@redberry.ge") {
     loginWindow.style.display = "none";
     succeed.style.display = "flex";
-    localStorage.setItem("blogAddBtn", addBlogBtn.textContent);
   } else {
     emaiLError.style.display = "flex";
   }
