@@ -4,7 +4,6 @@ const AiType = document.querySelector(".AI");
 const FigmaType = document.querySelector(".figma");
 const uiuxType = document.querySelector(".UI");
 const researchType = document.querySelector(".research");
-
 let blogSection = document.querySelector(".blogs-section");
 const logInBtn = document.querySelector(".login");
 const loginWindowContainer = document.querySelector(".login-window-container");
@@ -151,6 +150,11 @@ function renderBlogs(data) {
 
 getBlogs();
 
+if (localStorage.getItem("authenticated")) {
+  logInBtn.replaceWith(addBlogBtn);
+  addBlogBtn.style.display = "block";
+}
+
 logInBtn.addEventListener("click", () => {
   loginWindowContainer.style.display = "flex";
   loginWindow.style.display = "flex";
@@ -159,19 +163,8 @@ emailInput.addEventListener("click", () => {
   emailInput.style.border = "1.5px solid #5D37F3;";
 });
 shesvla.addEventListener("click", async () => {
-  const response = await fetch("http://localhost:4000/authenticate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: emailInput.value,
-    }),
-    credentials: "include",
-  });
-  const data = await response.json();
-  console.log(data);
   if (emailInput.value === "tato@redberry.ge") {
+    localStorage.setItem("authenticated", JSON.stringify(true));
     loginWindow.style.display = "none";
     succeed.style.display = "flex";
   } else {
@@ -182,9 +175,9 @@ closeBtn.forEach((item) => {
   item.addEventListener("click", () => {
     loginWindowContainer.style.display = "none";
     succeed.style.display = "none";
-    if ((succeed.style.display = "flex")) {
+    if (succeed.style.display === "flex") {
       addBlogBtn.style.display = "block";
-      logInBtn.replaceWith(addBlogBtn);
+      logInBtn.style.display = "none";
     }
   });
 });

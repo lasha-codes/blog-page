@@ -34,6 +34,15 @@ let clonedBtns = document.querySelectorAll(".cloned-btn-styles");
 const main = document.getElementById("main");
 let isError;
 let base64 = localStorage.getItem("base64");
+
+if (!localStorage.getItem("authenticated")) {
+  main.remove();
+
+  document.body.innerHTML = "You Don't Have Access to this Page";
+  document.body.style.fontSize = "40px";
+  window.location.href = "/blog-page";
+}
+
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     if (!file || !file.type.startsWith("image/")) {
@@ -63,11 +72,14 @@ dropZone.addEventListener("dragleave", (event) => {
   dropZone.classList.remove("drag-over");
 });
 
-dropZone.addEventListener("drop", async (event) => {
-  event.preventDefault();
+dropZone.addEventListener("drop", async (e) => {
+  e.preventDefault();
   dropZone.classList.remove("drag-over");
-  const files = event.dataTransfer.files;
-
+  const files = e.dataTransfer.files;
+  dropZone.style.display = "none";
+  selectedImg.style.display = "flex";
+  imageName.innerHTML = files[0].name;
+  window.location.reload();
   if (files.length > 0) {
     try {
       const base64 = await convertToBase64(files[0]);
