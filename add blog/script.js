@@ -204,7 +204,6 @@ async function getButtons() {
     const data = await response.json();
 
     const correctData = data.slice(0, 6);
-
     correctData.forEach((item) => {
       categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
     });
