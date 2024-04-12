@@ -15,10 +15,12 @@ const succeed = document.querySelector(".succeed");
 const closeBtn = document.querySelectorAll(".window-close");
 const addBlogBtn = document.getElementById("add-blog-btn");
 const okBtn = document.querySelector(".ok");
+let blogs = document.querySelectorAll(".user-blog");
 let blogTypes = [];
 let typeContainers;
 
 let originalData = [];
+let activeCategories = [];
 
 async function getBlogs() {
   try {
@@ -27,59 +29,57 @@ async function getBlogs() {
       throw new Error("Error fetching data");
     }
     originalData = await response.json();
+    localStorage.setItem("blogs", JSON.stringify(originalData));
     console.log(originalData);
 
     renderBlogs(originalData);
 
-    marketType.addEventListener("click", () => {
-      blogSection.innerHTML = "";
-      const filteredData = originalData.filter((item) =>
-        item.types.includes("მარკეტი")
-      );
-      renderBlogs(filteredData);
-    });
-
-    applicationType.addEventListener("click", () => {
-      blogSection.innerHTML = "";
-      const filteredData = originalData.filter((item) =>
-        item.types.includes("აპლიკაცია")
-      );
-      renderBlogs(filteredData);
-    });
-    AiType.addEventListener("click", () => {
-      blogSection.innerHTML = "";
-      const filteredData = originalData.filter((item) =>
-        item.types.includes("აპლიკაცია")
-      );
-      renderBlogs(filteredData);
-    });
-    FigmaType.addEventListener("click", () => {
-      blogSection.innerHTML = "";
-      const filteredData = originalData.filter((item) =>
-        item.types.includes("Figma")
-      );
-      renderBlogs(filteredData);
-    });
-    researchType.addEventListener("click", () => {
-      blogSection.innerHTML = "";
-      const filteredData = originalData.filter((item) =>
-        item.types.includes("კვლევა")
-      );
-      renderBlogs(filteredData);
-    });
-    uiuxType.addEventListener("click", () => {
-      blogSection.innerHTML = "";
-      const filteredData = originalData.filter((item) =>
-        item.types.includes("UI/UX")
-      );
-      renderBlogs(filteredData);
-    });
+    marketType.addEventListener("click", () =>
+      toggleCategoryFilter(marketType, "მარკეტი")
+    );
+    applicationType.addEventListener("click", () =>
+      toggleCategoryFilter(applicationType, "აპლიკაცია")
+    );
+    AiType.addEventListener("click", () =>
+      toggleCategoryFilter(AiType, "ხელოვნური ინტელექტი")
+    );
+    FigmaType.addEventListener("click", () =>
+      toggleCategoryFilter(FigmaType, "Figma")
+    );
+    researchType.addEventListener("click", () =>
+      toggleCategoryFilter(researchType, "კვლევა")
+    );
+    uiuxType.addEventListener("click", () =>
+      toggleCategoryFilter(uiuxType, "UI/UX")
+    );
   } catch (error) {
     console.error("Error fetching blogs:", error);
   }
 }
 
+function toggleCategoryFilter(categoryButton, category) {
+  categoryButton.classList.toggle("active-category");
+  if (activeCategories.includes(category)) {
+    activeCategories = activeCategories.filter((cat) => cat !== category);
+  } else {
+    activeCategories.push(category);
+  }
+  filterBlogs();
+}
+
+function filterBlogs() {
+  if (activeCategories.length === 0) {
+    renderBlogs(originalData);
+  } else {
+    const filteredData = originalData.filter((item) =>
+      activeCategories.some((cat) => item.types.includes(cat))
+    );
+    renderBlogs(filteredData);
+  }
+}
+
 function renderBlogs(data) {
+  blogSection.innerHTML = "";
   data.forEach((blog) => {
     let blogDate = blog.createdAt.slice(0, 10);
     const blogDescr = blog.description.slice(0, 90);

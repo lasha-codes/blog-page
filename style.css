@@ -357,3 +357,6 @@ h1 {
 #add-blog-btn:hover {
   background: purple;
 }
+.active-category {
+  border: 2px solid black;
+}
