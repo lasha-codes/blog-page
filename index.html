@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="redberrylogo">
+        <img src="./imgs/redberry-logo.png" alt="rebderry-logo" />
+      </div>
+      <div class="login">
+        <button class="login-btn">შესვლა</button>
+      </div>
+      <button id="add-blog-btn">დაამატე ბლოგი</button>
+    </header>
+    <main>
+      <div class="heading-img">
+        <h1>ბლოგი</h1>
+        <img src="./imgs/heading-image.png" alt="blog-header-img" />
+      </div>
+      <section class="blog-types-section">
+        <div class="market blog-type">
+          <button>მარკეტი</button>
+        </div>
+        <div class="application blog-type">
+          <button>აპლიკაცია</button>
+        </div>
+        <div class="AI blog-type">
+          <button>ხელოვნური ინტელექტი</button>
+        </div>
+        <div class="UI blog-type">
+          <button>UI/UX</button>
+        </div>
+        <div class="research blog-type">
+          <button>კვლევა</button>
+        </div>
+        <div class="figma blog-type">
+          <button>Figma</button>
+        </div>
+      </section>
+      <section class="blogs-section" >
+        <div class="blogs-trio">
+          <div class="user-blog" style="display:none">
+            <img src="./imgs/hills-img.png" alt="hills-img" class="blog-img" />
+            <div class="blogger-info">
+              <span class="blogger-name">ლილე კვარაცხელია</span>
+              <span class="publish-date">02.11.2023</span>
+            </div>
+            <div class="blog-title">
+              <h2>EOMM-ის მრჩეველთა საბჭოს ნინო ეგაძე შეუერთდა</h2>
+            </div>
+            <div class="user-blog-types">
+              <div class="market blog-type">
+                <button>მარკეტი</button>
+              </div>
+              <div class="application blog-type">
+                <button>აპლიკაცია</button>
+              </div>
+              <div class="AI blog-type">
+                <button>ხელოვნური ინტელექტი</button>
+              </div>
+            </div>
+            <div class="blog-description">
+              <p>
+                6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური
+                სიზუსტისთვის, ეს პროცესი...
+              </p>
+            </div>
+            <div class="see-all">
+              <span>სრულად ნახვა</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M5.93415 13.0052C5.64125 13.2981 5.64125 13.773 5.93415 14.0659C6.22704 14.3587 6.70191 14.3587 6.99481 14.0659L5.93415 13.0052ZM14.2855 6.46446C14.2855 6.05024 13.9498 5.71445 13.5355 5.71446L6.78555 5.71445C6.37133 5.71445 6.03555 6.05024 6.03555 6.46445C6.03555 6.87867 6.37133 7.21445 6.78555 7.21445H12.7855V13.2145C12.7855 13.6287 13.1213 13.9645 13.5355 13.9645C13.9498 13.9645 14.2855 13.6287 14.2855 13.2145L14.2855 6.46446ZM6.99481 14.0659L14.0659 6.99478L13.0052 5.93412L5.93415 13.0052L6.99481 14.0659Z"
+                  fill="#5D37F3"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="login-window-container">
+      <div class="login-window">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="window-close"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M7.75732 16.2426L16.2426 7.75736"
+            stroke="#1A1A1F"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16.2426 16.2426L7.75732 7.75736"
+            stroke="#1A1A1F"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <div class="email-container">
+          <h2>შესვლა</h2>
+          <span>ელ-ფოსტა</span>
+
+          <input
+            type="email"
+            placeholder="Example@redberry.ge"
+            id="email"
+            class="input-container forms-inputs"
+          />
+          <div class="mail-err-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              id="email-err-svg"
+            >
+              <path
+                d="M9.99967 1.66665C5.41634 1.66665 1.66634 5.41665 1.66634 9.99998C1.66634 14.5833 5.41634 18.3333 9.99967 18.3333C14.583 18.3333 18.333 14.5833 18.333 9.99998C18.333 5.41665 14.583 1.66665 9.99967 1.66665Z"
+                fill="#EA1919"
+              />
+              <path
+                d="M10 13.3333L10 9.16665"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10.0049 6.66669L9.9974 6.66669"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span style="all: unset; color: #ea1919; font-size: 13px"
+              >ელ-ფოსტა არ მოიძებნა</span
+            >
+          </div>
+          
+         
+        </div>
+          <div class="login-container">
+            <button class="login-btn">შესვლა</button>
+          </div>
+        </div>
+        <div class="succeed">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="window-close">
+            <path d="M7.75732 16.2426L16.2426 7.75736" stroke="#1A1A1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16.2426 16.2426L7.75732 7.75736" stroke="#1A1A1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="succeed_h2">
+            <img src="./imgs/tick-circle.svg" alt="succeed-logo" class="succeed-logo">
+            <h2>წარმატებული ავტორიზაცია</h2>
+          </div>
+          
+            <button id="submit" class="ok">კარგი</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+    
+  </body>
+</html>
