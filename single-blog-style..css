@@ -296,3 +296,11 @@ main {
 .blogs-section {
   width: 50%;
 }
+.familiar-blogs {
+  width: 100%;
+}
+.blogs-mover-container {
+  display: flex;
+  width: 100%;
+  background: black;
+}
