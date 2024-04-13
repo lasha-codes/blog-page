@@ -32,7 +32,6 @@ async function getBlogs() {
     }
     originalData = await response.json();
     localStorage.setItem("blogs", JSON.stringify(originalData));
-    console.log(originalData);
 
     renderBlogs(originalData);
 
@@ -84,7 +83,7 @@ function renderBlogs(data) {
   blogSection.innerHTML = "";
   data.forEach((blog) => {
     let blogDate = blog.createdAt.slice(0, 10);
-    const blogDescr = blog.description.slice(0, 90);
+    let blogDescr = blog.description.slice(0, 90);
 
     let blogHTML = `
       <div class="user-blog"> 
@@ -146,6 +145,69 @@ function renderBlogs(data) {
       button.style.backgroundColor = backgroundColor;
       button.style.color = "white";
       typesContainer.appendChild(button);
+    });
+    const seeAll = document.querySelectorAll(".see-all");
+    seeAll.forEach((link, index) => {
+      link.addEventListener("click", () => {
+        data.map((blog, idx) => {
+          if (index === idx) {
+            document.location.href = `single-blog.html?id=${blog._id}`;
+          }
+          blogDescr = blog.description;
+
+          blogHTML = `
+          
+            <div class="user-blog"> 
+            <img src="${blog.image}" alt="blog-img" class="blog-img" />
+            <div class="blogger-info">
+            <span class="blogger-name">${blog.author}</span>
+            <span class="publish-date">${blogDate}</span>
+            <span>${blog.email}<span>
+            </div>
+            <div class="blog-title">
+              <h2>${blog.title}</h2>
+              </div>
+              <div class="blog-types-container">
+              
+              </div>
+              <div class="blog-description">
+            <p>${blogDescr}</p>
+            </div>
+            </div>
+            `;
+          blog.types.forEach((type) => {
+            let backgroundColor = "";
+            switch (type) {
+              case "მარკეტი":
+                backgroundColor = "#D6961C";
+                break;
+              case "აპლიკაცია":
+                backgroundColor = "#15C972";
+                break;
+              case "ხელოვნური ინტელექტი":
+                backgroundColor = "#B71FDD";
+                break;
+              case "Figma":
+                backgroundColor = "#08D2AE";
+                break;
+              case "კვლევა":
+                backgroundColor = "#60BE16";
+                break;
+              case "UI/UX":
+                backgroundColor = "#DC2828";
+                break;
+              default:
+                backgroundColor = "#000000";
+            }
+            let button = document.createElement("button");
+            button.classList.add("blog-type-btns");
+            button.textContent = type;
+            button.style.backgroundColor = backgroundColor;
+            button.style.color = "white";
+            typesContainer.appendChild(button);
+          });
+        });
+      });
     });
   });
 }
