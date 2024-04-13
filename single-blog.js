@@ -18,9 +18,12 @@ async function getSingleBlog() {
 
               <div class="user-blog">
               <img src="${blogById.image}" alt="blog-img" class="blog-img" />
+
               <div class="blogger-info">
               <span class="blogger-name">${blogById.author}</span>
-              <span class="publish-date">${blogDate}</span>
+              <div class="email-and-date">
+              <span class="publish-date">${blogDate} .</span>
+              
               <span>${blogById.email}<span>
               </div>
               <div class="blog-title">
@@ -29,6 +32,7 @@ async function getSingleBlog() {
                 <div class="blog-types-container">
 
                 </div>
+                </div>
                 <div class="blog-description">
               <p>${blogDescr}</p>
               </div>
@@ -36,7 +40,7 @@ async function getSingleBlog() {
               `;
 
   blogSection.innerHTML += blogHTML;
-  let blogContainer = blogSection.lastChild;
+
   let typesContainer = document.querySelector(".blog-types-container");
 
   blogById.types.forEach((type) => {
