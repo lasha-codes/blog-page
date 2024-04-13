@@ -1,4 +1,11 @@
 const blogSection = document.querySelector(".blogs-section");
+const logInBtn = document.querySelector(".login");
+const loginWindowContainer = document.querySelector(".login-window-container");
+const loginWindow = document.querySelector(".login-window");
+const emailInput = document.getElementById("email");
+const emaiLError = document.querySelector(".mail-err-container");
+const shesvla = document.querySelector(".login-container");
+const succeed = document.querySelector(".succeed");
 
 const queryParams = new URLSearchParams(window.location.search);
 console.log(queryParams.get("id"));
@@ -77,3 +84,67 @@ async function getSingleBlog() {
 }
 
 getSingleBlog();
+
+if (localStorage.getItem("authenticated")) {
+  logInBtn.replaceWith(addBlogBtn);
+  addBlogBtn.style.display = "block";
+}
+
+logInBtn.addEventListener("click", () => {
+  loginWindowContainer.style.display = "flex";
+  loginWindow.style.display = "flex";
+});
+emailInput.addEventListener("click", () => {
+  emailInput.style.border = "1.5px solid #5D37F3;";
+});
+shesvla.addEventListener("click", async () => {
+  if (emailInput.value === "tato@redberry.ge") {
+    localStorage.setItem("authenticated", JSON.stringify(true));
+    loginWindow.style.display = "none";
+    succeed.style.display = "flex";
+  } else {
+    emaiLError.style.display = "flex";
+  }
+});
+closeBtn.forEach((item) => {
+  item.addEventListener("click", () => {
+    loginWindowContainer.style.display = "none";
+    succeed.style.display = "none";
+    if (succeed.style.display === "flex") {
+      addBlogBtn.style.display = "block";
+      logInBtn.style.display = "none";
+    }
+  });
+});
+
+okBtn.addEventListener("click", () => {
+  loginWindowContainer.style.display = "none";
+  succeed.style.display = "none";
+  addBlogBtn.style.display = "block";
+  logInBtn.replaceWith(addBlogBtn);
+});
+storeBlogAddBtn();
+function storeBlogAddBtn() {
+  if (localStorage.getItem("blogAddBtn")) {
+    addBlogBtn.style.display = "block";
+    logInBtn.style.display = "none";
+  }
+}
+addBlogBtn.addEventListener("click", () => {
+  console.log("sadasd");
+  document.location.href = "./add blog/add-blog.html";
+});
+
+seeAll.forEach((button) => {
+  button.addEventListener("click", async () => {
+    console.log(213);
+  });
+});
+async function seeWholeBlog(id) {
+  const response = await fetch(`http://localhost:4000/get-blogs/${id}`);
+  if (!response.ok) {
+    throw new Error("Error fetching data");
+  }
+  const data = await response.json();
+  console.log(data);
+}
