@@ -153,6 +153,7 @@ function renderBlogs(data) {
           if (index === idx) {
             document.location.href = `single-blog.html?id=${blog._id}`;
           }
+
           blogDescr = blog.description;
 
           blogHTML = `

@@ -6,7 +6,10 @@ const emailInput = document.getElementById("email");
 const emaiLError = document.querySelector(".mail-err-container");
 const shesvla = document.querySelector(".login-container");
 const succeed = document.querySelector(".succeed");
-
+const addBlogBtn = document.getElementById("add-blog-btn");
+const okBtn = document.querySelector(".ok");
+const closeBtn = document.querySelectorAll(".window-close");
+const backArrow = document.querySelector(".move-arrow");
 const queryParams = new URLSearchParams(window.location.search);
 console.log(queryParams.get("id"));
 
@@ -134,17 +137,7 @@ addBlogBtn.addEventListener("click", () => {
   console.log("sadasd");
   document.location.href = "./add blog/add-blog.html";
 });
-
-seeAll.forEach((button) => {
-  button.addEventListener("click", async () => {
-    console.log(213);
-  });
+backArrow.addEventListener("click", () => {
+  console.log("gsad");
+  document.location.href = "./index.html";
 });
-async function seeWholeBlog(id) {
-  const response = await fetch(`http://localhost:4000/get-blogs/${id}`);
-  if (!response.ok) {
-    throw new Error("Error fetching data");
-  }
-  const data = await response.json();
-  console.log(data);
-}
