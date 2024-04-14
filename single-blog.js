@@ -29,13 +29,14 @@ async function getSingleBlog() {
   data.map((blog) => {
     if (blog.types.some((type) => blogById.types.includes(type))) {
       let blogDescr = blog.description.slice(0, 90);
-
       let blogDate = blog.date.slice(0, 10);
       let blogHTML = `
             <div class="user-blog similar-blog">
                 <img src="${blog.image}" alt="blog-img" class="blog-img" />
                 <div class="blogger-info similar-blog-info">
-                    <span class="blogger-name similar-blog-name">${blog.author}</span>
+                    <span class="blogger-name similar-blog-name">${
+                      blog.author
+                    }</span>
                     <div class="email-and-date">
                         <span class="publish-date">${blogDate} .</span>
                     </div>
@@ -45,7 +46,7 @@ async function getSingleBlog() {
                     <div class="blog-types-container familiar-types"></div>
                 </div>
                 <div class="blog-description similar-blog-descr">
-                    <p>${blogDescr}</p>
+                    <p>${blogDescr + "..."}</p>
                 </div>
                 <div class="see-all">
                     <span>სრულად ნახვა</span>
@@ -222,12 +223,13 @@ backArrow.addEventListener("click", () => {
   console.log("gsad");
   document.location.href = "./index.html";
 });
+
 arrowRight.addEventListener("click", () => {
   const width = Math.round(similarBlogs.getBoundingClientRect().width);
   console.log(width);
   similarBlogs.style.transform = `translateX(${-(
     window.outerWidth +
-    400 -
+    300 -
     width
   )}px)`;
   arrowLeft.classList.add("active-arrow");

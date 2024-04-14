@@ -16,6 +16,7 @@ const seeAll = document.querySelectorAll(".see-all");
 const closeBtn = document.querySelectorAll(".window-close");
 const addBlogBtn = document.getElementById("add-blog-btn");
 const okBtn = document.querySelector(".ok");
+
 let blogs = document.querySelectorAll(".user-blog");
 
 let blogTypes = [];
