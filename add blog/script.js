@@ -10,7 +10,7 @@ const blogTitle = document.getElementById("blog-title");
 const blogDesr = document.getElementById("blog-description");
 const blogDate = document.getElementById("blog-date");
 const userMail = document.getElementById("email");
-const submitBtn = document.querySelector(".submit-container");
+const submitBtn = document.getElementById("submitBtn");
 const arrowDown = document.getElementById("arrow-down");
 const categorySelector = document.querySelector(".categories");
 const typeButtons = document.querySelectorAll(".blog-type");
@@ -45,22 +45,34 @@ if (!localStorage.getItem("authenticated")) {
 
 const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
-    if (!file || !file.type.startsWith("image/")) {
+    console.log("File:", file); // Log the file to see if it's correctly passed
+
+    if (!file || !file.type || !file.type.startsWith("image/")) {
       reject(new Error("Invalid file type or file not provided."));
       return;
     }
+
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
+
     fileReader.onload = () => {
       resolve(fileReader.result);
     };
+
     fileReader.onerror = (error) => {
+      reject(error);
+    };
+    fileReader.onload = () => {
+      console.log("File loaded successfully.");
+      resolve(fileReader.result);
+    };
+
+    fileReader.onerror = (error) => {
+      console.error("Error reading file:", error);
       reject(error);
     };
   });
 };
-
-// Assuming selectedImg, dropZone, fileInput, and imageName are defined elsewhere
 
 selectedImg.style.display = "none";
 dropZone.addEventListener("dragover", (event) => {
@@ -71,25 +83,39 @@ dropZone.addEventListener("dragover", (event) => {
 dropZone.addEventListener("dragleave", (event) => {
   dropZone.classList.remove("drag-over");
 });
+function updateUI(base64) {
+  if (fileInput.files.length > 0) {
+    selectedImg.style.display = "flex";
+    dropZone.classList.remove("drag-over");
+    dropZone.style.display = "none";
+    imageName.innerHTML = fileInput.files[0].name;
+  } else {
+    selectedImg.style.display = "none";
+    dropZone.style.display = "flex";
+    imageName.innerHTML = "";
+  }
+}
 
 dropZone.addEventListener("drop", async (e) => {
   e.preventDefault();
-  dropZone.classList.remove("drag-over");
-  const files = e.dataTransfer.files;
-  dropZone.style.display = "none";
-  selectedImg.style.display = "flex";
-  imageName.innerHTML = files[0].name;
   window.location.reload();
-  if (files.length > 0) {
-    try {
-      const base64 = await convertToBase64(files[0]);
-      console.log(base64);
-      localStorage.setItem("base64", base64);
-      localStorage.setItem("pathName", files[0].name);
-      checkSelected();
-    } catch (error) {
-      console.error(error);
-    }
+  const files = e.dataTransfer.files;
+  if (files.length === 0) {
+    console.error("No files dropped.");
+    return;
+  }
+
+  const file = files[0];
+
+  try {
+    const base64 = await convertToBase64(file);
+    console.log(base64);
+    updateUI(base64);
+
+    localStorage.setItem("base64", base64);
+    localStorage.setItem("pathName", file.name);
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -118,16 +144,25 @@ closeBtn.addEventListener("click", (e) => {
   localStorage.setItem("base64", "");
 });
 fileInput.addEventListener("change", async () => {
-  base64 = await convertToBase64(fileInput.files[0]);
-  console.log(base64);
-  localStorage.setItem("base64", base64);
-  localStorage.setItem("pathName", fileInput.files[0].name);
+  const file = fileInput.files[0];
+  if (file) {
+    try {
+      const base64 = await convertToBase64(file);
+      console.log(base64);
+      updateUI(base64);
+      localStorage.setItem("base64", base64);
+      localStorage.setItem("pathName", file.name);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 });
 
 function storeImage() {
+  const base64 = localStorage.getItem("base64");
   const filePath = localStorage.getItem("pathName");
-  console.log(filePath);
-  if (filePath) {
+
+  if (base64 && filePath) {
     isError = false;
     selectedImg.style.display = "flex";
     dropZone.style.display = "none";
@@ -139,6 +174,7 @@ function storeImage() {
     imageName.innerHTML = "";
   }
 }
+
 let buttonArr = [];
 
 function getInputValues() {
@@ -273,7 +309,7 @@ async function getButtons() {
   }
 }
 getButtons();
-localStorage.setItem("authorInput", "");
+
 arrowDown.addEventListener("click", () => {
   categoryContainer.style.outline = "1.5px solid #5D37F3";
 
@@ -296,6 +332,7 @@ authorInput.addEventListener("input", () => {
     isError = false;
   } else {
     isError = true;
+    localStorage.setItem("authorInput", "");
   }
 
   let splitedValue = authorInput.value.split(" ");
@@ -435,42 +472,37 @@ userMail.addEventListener("change", (e) => {
 });
 
 function validateInputs() {
-  if (
-    fileInput.files.length === 0 ||
-    authorInput.value.length < 4 ||
-    blogTitle.value.length < 4 ||
-    blogDesr.value.length < 4 ||
-    blogDate.value === "" ||
-    userMail.value.split("@")[1] !== "redberry.ge" ||
-    categoryList.children.length === 1
-  ) {
-    return false;
-  }
+  const keys = [
+    "blogDesc",
+    "buttonArr",
+    "blogTitle",
+    "email",
+    "blogDate",
+    "pathName",
+    "authorInput",
+  ];
 
-  return true;
+  return keys.every((key) => localStorage.getItem(key));
 }
-
 function toggleSubmitButton() {
   if (validateInputs()) {
     submitBtn.classList.add("active-submit");
-    return true;
-  } else {
-    submitBtn.classList.remove("active-submit");
-    return false;
   }
 }
 fileInput.addEventListener("change", toggleSubmitButton);
-authorInput.addEventListener("input", toggleSubmitButton);
-blogTitle.addEventListener("input", toggleSubmitButton);
-blogDesr.addEventListener("input", toggleSubmitButton);
+authorInput.addEventListener("change", toggleSubmitButton);
+blogTitle.addEventListener("change", toggleSubmitButton);
+blogDesr.addEventListener("change", toggleSubmitButton);
 blogDate.addEventListener("change", toggleSubmitButton);
 userMail.addEventListener("change", toggleSubmitButton);
 categoryList.addEventListener("click", toggleSubmitButton);
 closeBtn.addEventListener("click", toggleSubmitButton);
-
+arrowDown.addEventListener("click", toggleSubmitButton);
+toggleSubmitButton();
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  if (toggleSubmitButton()) {
+  if (submitBtn.classList.contains("active-submit")) {
+    console.log("sadasd");
     try {
       const response = await fetch("http://localhost:4000/add-blog", {
         method: "POST",
