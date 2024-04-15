@@ -48,6 +48,7 @@ header {
   padding: 0 75px 0 89px;
   justify-content: space-between;
 }
+
 h1 {
   color: #1a1a1f;
   font-size: 64px;
@@ -61,6 +62,7 @@ h1 {
   display: flex;
   gap: 24px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .blog-types-section button {
   all: unset;
@@ -361,4 +363,29 @@ h1 {
 .active-category {
   border: 2px solid black;
 }
+@media only screen and (max-width: 900px) {
+  header {
+    padding: 10px;
+  }
+  .heading-img {
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+  }
+  .heading-img img {
+    width: 100%;
+  }
+  h1 {
+    font-size: 35px;
+  }
+  .blogs-section {
+    padding: 10px;
+  }
 
+  .user-blog img {
+    width: 100%;
+  }
+  .user-blog .blog-types-container {
+    flex-wrap: wrap;
+  }
+}
