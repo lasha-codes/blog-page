@@ -224,7 +224,7 @@ function getInputValues() {
     categoryList.innerHTML += `<button style="color:white; background-color:${backgroundColor}"; min-width:100px; class="blog-type-btns">${text}<span>X</span></button>`;
   });
 }
-const btnArr = localStorage.setItem("buttonArr", buttonArr);
+
 function checkBtnArr() {
   const btnArr = localStorage.getItem("buttonArr");
   let splitedArr = btnArr.split(",");
