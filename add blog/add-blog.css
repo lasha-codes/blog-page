@@ -338,7 +338,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .cloned-btn-styles {
   display: flex;
-
+  filter: brightness();
   border: none;
   font-size: 12px;
   font-weight: 500;
@@ -452,6 +452,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   form {
     flex-direction: column;
+    padding: 0 15px;
   }
 
   .author-and-heading {
@@ -459,18 +460,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   .date-and-categories {
     flex-direction: column;
+    width: 100%;
   }
-  .main-section {
-    width: 0;
-  }
-  #main {
-    justify-content: flex;
-    align-items: center;
-  }
+
   h1 {
     font-size: 25px;
+    text-align: center;
   }
   h2 {
     font-weight: bold;
+  }
+  .mian-section {
+    width: 100%;
+  }
+  #move-arrow {
+    width: 30px;
+    top: 7%;
+  }
+  .file-section {
+    padding: 0 15px;
+  }
+  #main {
+    all: unset;
+    display: flex;
+    padding-top: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .submit-container {
+    width: 100%;
   }
 }
