@@ -406,3 +406,88 @@ main {
 .active-arrow {
   background: #5d37f3;
 }
+@media only screen and (max-width: 900px) {
+  header {
+    padding: 0 30px;
+  }
+  .blog-img {
+    width: auto;
+    margin-top: 20%;
+  }
+  .user-blog {
+    width: auto;
+  }
+  .blogger-info {
+    padding: 30px 30px 15px 30px;
+  }
+  .blog-title h2 {
+    font-size: 30px;
+  }
+  main {
+    padding-top: 12%;
+  }
+  .blog-description {
+    padding: 15px 30px 30px 30px;
+  }
+  .blog-description p {
+    margin: 0;
+  }
+  .move-arrow {
+    width: 35px;
+    top: 13%;
+    left: 5%;
+  }
+  .blogs-mover-container {
+    padding: 0;
+  }
+  .blogs-mover-container h2 {
+    font-size: 25px;
+  }
+  .mover-arrows {
+    gap: 20px;
+  }
+  #arrow-right,
+  #arrow-left {
+    width: 30px;
+    height: 40px;
+  }
+  .familiar-blogs-container {
+    margin-top: 90px;
+    padding: 0 15px;
+  }
+  .similar-blog img {
+    object-fit: cover;
+    margin: 0;
+    width: 100% !important;
+    height: 30%;
+  }
+  .similar-blog-info {
+    padding: 0;
+    gap: 10px;
+  }
+  .similar-blog-name {
+    margin-top: 21px;
+  }
+
+  .familiar-types {
+    width: 100%;
+  }
+  .similar-blog-descr {
+    width: 100%;
+    padding: 0 !important;
+  }
+  .similar-blog-descr p {
+    font-size: 15px;
+  }
+  .see-all {
+    margin-top: 5px;
+  }
+  .similar-blog {
+    width: 70%;
+  }
+
+  .similar-blog-title h2 {
+    font-size: 18px;
+    width: 70% !important;
+  }
+}

@@ -40,7 +40,7 @@ async function getSingleBlog() {
                     <div class="email-and-date">
                         <span class="publish-date">${blogDate} .</span>
                     </div>
-                    <div class="blog-title">
+                    <div class="blog-title similar-blog-title">
                         <h2>${blog.title}</h2>
                     </div>
                     <div class="blog-types-container familiar-types"></div>
@@ -118,7 +118,7 @@ async function getSingleBlog() {
               
               <span>${blogById.email}<span>
               </div>
-              <div class="blog-title">
+              <div class="blog-title ">
                 <h2>${blogById.title}</h2>
                 </div>
                 <div class="blog-types-container">
