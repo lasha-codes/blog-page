@@ -256,6 +256,7 @@ async function getButtons() {
     correctData.forEach((item) => {
       categorySelector.innerHTML += `<button style="color:white; filter:brightness(95%); cursor:pointer;background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
     });
+    let categoryBtns = [];
     let clonedButton;
     categorySelector.addEventListener("click", (event) => {
       event.preventDefault();
@@ -265,6 +266,10 @@ async function getButtons() {
       if (event.target.classList.contains("blog-type-btns")) {
         selectCategorySpan.style.display = "none";
 
+        event.target.style.filter = "brightness(105%)";
+        if (event.target.style.filter === "brightness(105%)") {
+          categoryBtns.push(event.target);
+        }
         const X = document.createElement("span");
         X.append("X");
         clonedButton = event.target.cloneNode(true);
@@ -285,6 +290,14 @@ async function getButtons() {
       });
       if (event.target.textContent === "X") {
         event.target.parentElement.remove();
+        const index = categoryBtns.findIndex(
+          (btn) => btn.textContent.trim() === parentBtnText
+        );
+        if (index !== -1) {
+          categoryBtns[index].style.filter = "brightness(95%)";
+
+          categoryBtns.splice(index, 1);
+        }
       }
 
       if (
