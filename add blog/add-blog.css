@@ -333,7 +333,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 13px;
   border-radius: 20px;
   border: none;
-  width: 100%;
+  max-width: 150px;
+  line-height: 16px;
+}
+.cloned-btn-styles {
+  display: flex;
+
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 30px;
+  padding: 8px;
 }
 .category-list div {
   padding: 8px 16px;
@@ -434,4 +445,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   opacity: 1 !important;
   background: white !important;
+}
+@media only screen and (max-width: 900px) {
+  body {
+    padding: 0;
+  }
+  form {
+    flex-direction: column;
+  }
+
+  .author-and-heading {
+    flex-direction: column;
+  }
+  .date-and-categories {
+    flex-direction: column;
+  }
+  .main-section {
+    width: 0;
+  }
+  #main {
+    justify-content: flex;
+    align-items: center;
+  }
+  h1 {
+    font-size: 25px;
+  }
+  h2 {
+    font-weight: bold;
+  }
 }

@@ -254,9 +254,9 @@ async function getButtons() {
 
     const correctData = data.slice(0, 6);
     correctData.forEach((item) => {
-      categorySelector.innerHTML += `<button style="color:white; background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
+      categorySelector.innerHTML += `<button style="color:white; filter:brightness(95%); cursor:pointer;background-color:${item.background_color}" class="blog-type-btns">${item.title}</button>`;
     });
-
+    let clonedButton;
     categorySelector.addEventListener("click", (event) => {
       event.preventDefault();
       if (buttonArr.includes(event.target.textContent.trim())) return;
@@ -264,9 +264,10 @@ async function getButtons() {
       localStorage.setItem("buttonArr", buttonArr);
       if (event.target.classList.contains("blog-type-btns")) {
         selectCategorySpan.style.display = "none";
+
         const X = document.createElement("span");
         X.append("X");
-        let clonedButton = event.target.cloneNode(true);
+        clonedButton = event.target.cloneNode(true);
         clonedButton.classList.add("cloned-btn-styles");
         clonedButton.append(X);
         categoryList.appendChild(clonedButton);
@@ -285,7 +286,7 @@ async function getButtons() {
       if (event.target.textContent === "X") {
         event.target.parentElement.remove();
       }
-      console.log(event.target.parentElement.textContent.split("X")[0].trim());
+
       if (
         event.target.parentElement.textContent.split("X")[0].trim() === "UI/U"
       ) {
@@ -297,6 +298,8 @@ async function getButtons() {
       localStorage.setItem("buttonArr", buttonArr);
       if (categoryList.children.length == 1) {
         selectCategorySpan.style.display = "block";
+        submitBtn.classList.remove("active-submit");
+        localStorage.setItem("buttonArr", "");
       } else {
         selectCategorySpan.style.display = "none";
       }
@@ -319,6 +322,7 @@ arrowDown.addEventListener("click", () => {
   if (categoryList.children.length > 1) {
     categoryContainer.style.outline = "1px solid  #14D81C";
   } else {
+    // selectCategorySpan.style.display = "block";
   }
 });
 
@@ -485,10 +489,17 @@ function validateInputs() {
   return keys.every((key) => localStorage.getItem(key));
 }
 function toggleSubmitButton() {
+  if (categoryList.children.length === 1) {
+    submitBtn.classList.remove("active-submit");
+  }
   if (validateInputs()) {
     submitBtn.classList.add("active-submit");
+    return true;
+  } else {
+    submitBtn.classList.remove("active-submit");
   }
 }
+
 fileInput.addEventListener("change", toggleSubmitButton);
 authorInput.addEventListener("change", toggleSubmitButton);
 blogTitle.addEventListener("change", toggleSubmitButton);
@@ -498,7 +509,7 @@ userMail.addEventListener("change", toggleSubmitButton);
 categoryList.addEventListener("click", toggleSubmitButton);
 closeBtn.addEventListener("click", toggleSubmitButton);
 arrowDown.addEventListener("click", toggleSubmitButton);
-toggleSubmitButton();
+
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   if (submitBtn.classList.contains("active-submit")) {
@@ -556,6 +567,8 @@ submitBtn.addEventListener("click", async (e) => {
     } catch (e) {
       console.log(e.message);
     }
+  } else {
+    return;
   }
 });
 windowClose.addEventListener("click", () => {
